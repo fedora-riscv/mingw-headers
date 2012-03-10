@@ -15,7 +15,7 @@
 
 Name:           mingw-headers
 Version:        2.0.999
-Release:        0.4.trunk.%{snapshot_date}%{?dist}
+Release:        0.5.trunk.%{snapshot_date}%{?dist}
 Summary:        Win32/Win64 header files
 
 License:        Public Domain and LGPLv2+ and ZPLv2.1
@@ -113,6 +113,9 @@ rm -f $RPM_BUILD_ROOT%{mingw64_includedir}/pthread_unistd.h
 
 
 %changelog
+* Sat Mar 03 2012 Erik van Pienbroek <epienbro@fedoraproject.org> - 2.0.999-0.5.trunk.20120224
+- Bump EVR to fix upgrade path when upgrading from the testing repository
+
 * Fri Feb 24 2012 Erik van Pienbroek <epienbro@fedoraproject.org> - 2.0.999-0.4.trunk.20120224
 - Update to 20120224 snapshot
 - Eliminated some conditionals related to snapshot builds
