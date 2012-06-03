@@ -1,7 +1,4 @@
-%global snapshot_date 20120224
-
-%global mingw_build_win32 1
-%global mingw_build_win64 1
+%global snapshot_date 20120601
 
 # The mingw-w64-headers provide the headers pthread_time.h
 # and pthread_unistd.h by default and are dummy headers.
@@ -15,7 +12,7 @@
 
 Name:           mingw-headers
 Version:        2.0.999
-Release:        0.5.trunk.%{snapshot_date}%{?dist}
+Release:        0.6.trunk.%{snapshot_date}%{?dist}
 Summary:        Win32/Win64 header files
 
 License:        Public Domain and LGPLv2+ and ZPLv2.1
@@ -113,6 +110,9 @@ rm -f $RPM_BUILD_ROOT%{mingw64_includedir}/pthread_unistd.h
 
 
 %changelog
+* Sat Jun 02 2012 Erik van Pienbroek <epienbro@fedoraproject.org> - 2.0.999-0.6.trunk.20120601
+- Update to 20120601 snapshot
+
 * Sat Mar 03 2012 Erik van Pienbroek <epienbro@fedoraproject.org> - 2.0.999-0.5.trunk.20120224
 - Bump EVR to fix upgrade path when upgrading from the testing repository
 
