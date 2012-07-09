@@ -1,4 +1,4 @@
-%global snapshot_date 20120705
+%global snapshot_date 20120709
 
 # The mingw-w64-headers provide the headers pthread_time.h
 # and pthread_unistd.h by default and are dummy headers.
@@ -12,7 +12,7 @@
 
 Name:           mingw-headers
 Version:        2.0.999
-Release:        0.7.trunk.%{snapshot_date}%{?dist}
+Release:        0.8.trunk.%{snapshot_date}%{?dist}
 Summary:        Win32/Win64 header files
 
 License:        Public Domain and LGPLv2+ and ZPLv2.1
@@ -82,15 +82,6 @@ pushd mingw-w64-headers
     %mingw_make_install DESTDIR=$RPM_BUILD_ROOT 
 popd
 
-# Move the files to a proper location
-mkdir -p $RPM_BUILD_ROOT%{mingw32_includedir}
-mv $RPM_BUILD_ROOT%{mingw32_prefix}/%{mingw32_target}/include/* $RPM_BUILD_ROOT%{mingw32_includedir}/
-rm -rf $RPM_BUILD_ROOT%{mingw32_prefix}/%{mingw32_target}
-
-mkdir -p $RPM_BUILD_ROOT%{mingw64_includedir}
-mv $RPM_BUILD_ROOT%{mingw64_prefix}/%{mingw64_target}/include/* $RPM_BUILD_ROOT%{mingw64_includedir}/
-rm -rf $RPM_BUILD_ROOT%{mingw32_prefix}/%{mingw64_target}
-
 # Drop the dummy pthread headers if necessary
 %if 0%{?bundle_dummy_pthread_headers} == 0
 rm -f $RPM_BUILD_ROOT%{mingw32_includedir}/pthread_time.h
@@ -110,6 +101,11 @@ rm -f $RPM_BUILD_ROOT%{mingw64_includedir}/pthread_unistd.h
 
 
 %changelog
+* Mon Jul 09 2012 Erik van Pienbroek <epienbro@fedoraproject.org> - 2.0.999-0.8.trunk.20120709
+- Update to 20120709 snapshot (contains full Cygwin support)
+- Eliminated various manual kludges as upstream now installs their
+  files to the correct folders by default
+
 * Thu Jul 05 2012 Erik van Pienbroek <epienbro@fedoraproject.org> - 2.0.999-0.7.trunk.20120705
 - Update to 20120705 snapshot (contains various Cygwin changes)
 
