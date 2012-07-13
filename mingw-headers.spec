@@ -1,4 +1,4 @@
-%global snapshot_date 20120709
+%global snapshot_date 20120713
 
 # The mingw-w64-headers provide the headers pthread_time.h
 # and pthread_unistd.h by default and are dummy headers.
@@ -12,7 +12,7 @@
 
 Name:           mingw-headers
 Version:        2.0.999
-Release:        0.8.trunk.%{snapshot_date}%{?dist}
+Release:        0.9.trunk.%{snapshot_date}%{?dist}
 Summary:        Win32/Win64 header files
 
 License:        Public Domain and LGPLv2+ and ZPLv2.1
@@ -101,6 +101,9 @@ rm -f $RPM_BUILD_ROOT%{mingw64_includedir}/pthread_unistd.h
 
 
 %changelog
+* Fri Jul 13 2012 Erik van Pienbroek <epienbro@fedoraproject.org> - 2.0.999-0.9.trunk.20120713
+- Update to 20120713 snapshot
+
 * Mon Jul 09 2012 Erik van Pienbroek <epienbro@fedoraproject.org> - 2.0.999-0.8.trunk.20120709
 - Update to 20120709 snapshot (contains full Cygwin support)
 - Eliminated various manual kludges as upstream now installs their
