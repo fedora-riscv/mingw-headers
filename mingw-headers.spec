@@ -12,7 +12,7 @@
 
 Name:           mingw-headers
 Version:        2.0.999
-Release:        0.11.trunk.%{snapshot_date}%{?dist}
+Release:        0.12.trunk.%{snapshot_date}%{?dist}
 Summary:        Win32/Win64 header files
 
 License:        Public Domain and LGPLv2+ and ZPLv2.1
@@ -30,6 +30,7 @@ BuildArch:      noarch
 BuildRequires:  mingw32-filesystem >= 95
 BuildRequires:  mingw64-filesystem >= 95
 
+Provides: bundled(libiberty)
 
 %description
 MinGW Windows cross-compiler Win32 and Win64 header files.
@@ -101,6 +102,9 @@ rm -f $RPM_BUILD_ROOT%{mingw64_includedir}/pthread_unistd.h
 
 
 %changelog
+* Mon Oct 15 2012 Jon Ciesla <limburgher@gmail.com> - 2.0.999-0.12.trunk.20121006
+- Provides: bundled(libiberty)
+
 * Sat Oct  6 2012 Erik van Pienbroek <epienbro@fedoraproject.org> - 2.0.999-0.11.trunk.20121006
 - Update to 20121006 snapshot
 
