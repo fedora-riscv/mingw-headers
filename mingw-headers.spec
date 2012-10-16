@@ -1,4 +1,5 @@
-%global snapshot_date 20121006
+%global snapshot_date 20121016
+%global branch trunk
 
 # The mingw-w64-headers provide the headers pthread_time.h
 # and pthread_unistd.h by default and are dummy headers.
@@ -12,7 +13,7 @@
 
 Name:           mingw-headers
 Version:        2.0.999
-Release:        0.12.trunk.%{snapshot_date}%{?dist}
+Release:        0.13.%{branch}.%{snapshot_date}%{?dist}
 Summary:        Win32/Win64 header files
 
 License:        Public Domain and LGPLv2+ and ZPLv2.1
@@ -20,7 +21,9 @@ Group:          Development/Libraries
 
 URL:            http://mingw-w64.sourceforge.net/
 %if 0%{?snapshot_date}
-Source0:        http://downloads.sourceforge.net/mingw-w64/mingw-w64-src_%{snapshot_date}.tar.bz2
+# To regerenate a snapshot:
+# wget http://mingw-w64.svn.sourceforge.net/viewvc/mingw-w64/%{branch}/?view=tar -O mingw-w64-%{branch}-snapshot-$(date '+%Y%m%d').tar.gz
+Source0:        mingw-w64-%{branch}-snapshot-%{snapshot_date}.tar.gz
 %else
 Source0:        http://downloads.sourceforge.net/mingw-w64/mingw-w64-v%{version}.tar.gz
 %endif
@@ -30,7 +33,6 @@ BuildArch:      noarch
 BuildRequires:  mingw32-filesystem >= 95
 BuildRequires:  mingw64-filesystem >= 95
 
-Provides: bundled(libiberty)
 
 %description
 MinGW Windows cross-compiler Win32 and Win64 header files.
@@ -66,7 +68,7 @@ rm -rf mingw-w64-v%{version}
 mkdir mingw-w64-v%{version}
 cd mingw-w64-v%{version}
 tar -xf %{S:0}
-%setup -q -D -T -n mingw-w64-v%{version}/mingw
+%setup -q -D -T -n mingw-w64-v%{version}/%{branch}
 %else
 %setup -q -n mingw-w64-v%{version}
 %endif
@@ -102,6 +104,11 @@ rm -f $RPM_BUILD_ROOT%{mingw64_includedir}/pthread_unistd.h
 
 
 %changelog
+* Tue Oct 16 2012 Erik van Pienbroek <epienbro@fedoraproject.org> - 2.0.999-0.13.trunk.20121016
+- Update to 20121016 snapshot
+- Use a different source tarball which doesn't contain unrelevant code (like libiberty)
+- Removed Provides: bundled(libiberty)
+
 * Mon Oct 15 2012 Jon Ciesla <limburgher@gmail.com> - 2.0.999-0.12.trunk.20121006
 - Provides: bundled(libiberty)
 
