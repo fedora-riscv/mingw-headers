@@ -1,4 +1,4 @@
-%global snapshot_date 20121016
+%global snapshot_date 20121109
 %global branch trunk
 
 # The mingw-w64-headers provide the headers pthread_time.h
@@ -13,7 +13,7 @@
 
 Name:           mingw-headers
 Version:        2.0.999
-Release:        0.13.%{branch}.%{snapshot_date}%{?dist}
+Release:        0.14.%{branch}.%{snapshot_date}%{?dist}
 Summary:        Win32/Win64 header files
 
 License:        Public Domain and LGPLv2+ and ZPLv2.1
@@ -104,6 +104,9 @@ rm -f $RPM_BUILD_ROOT%{mingw64_includedir}/pthread_unistd.h
 
 
 %changelog
+* Fri Nov  9 2012 Erik van Pienbroek <epienbro@fedoraproject.org> - 2.0.999-0.14.trunk.20121109
+- Update to 20121109 snapshot
+
 * Tue Oct 16 2012 Erik van Pienbroek <epienbro@fedoraproject.org> - 2.0.999-0.13.trunk.20121016
 - Update to 20121016 snapshot
 - Use a different source tarball which doesn't contain unrelevant code (like libiberty)
