@@ -1,4 +1,4 @@
-%global snapshot_date 20121109
+%global snapshot_date 20121110
 %global branch trunk
 
 # The mingw-w64-headers provide the headers pthread_time.h
@@ -13,7 +13,7 @@
 
 Name:           mingw-headers
 Version:        2.0.999
-Release:        0.14.%{branch}.%{snapshot_date}%{?dist}
+Release:        0.15.%{branch}.%{snapshot_date}%{?dist}
 Summary:        Win32/Win64 header files
 
 License:        Public Domain and LGPLv2+ and ZPLv2.1
@@ -104,6 +104,10 @@ rm -f $RPM_BUILD_ROOT%{mingw64_includedir}/pthread_unistd.h
 
 
 %changelog
+* Sat Nov 10 2012 Erik van Pienbroek <epienbro@fedoraproject.org> - 2.0.999-0.15.trunk.20121110
+- Update to 20121110 snapshot
+- Fixes build issue with DirectWrite support in mingw-qt5-qtbase
+
 * Fri Nov  9 2012 Erik van Pienbroek <epienbro@fedoraproject.org> - 2.0.999-0.14.trunk.20121109
 - Update to 20121109 snapshot
 
