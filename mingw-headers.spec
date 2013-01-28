@@ -13,7 +13,7 @@
 
 Name:           mingw-headers
 Version:        2.0.999
-Release:        0.8.%{branch}.%{snapshot_date}%{?dist}
+Release:        0.9.%{branch}.%{snapshot_date}%{?dist}
 Summary:        Win32/Win64 header files
 
 License:        Public Domain and LGPLv2+ and ZPLv2.1
@@ -27,6 +27,10 @@ Source0:        mingw-w64-%{branch}-snapshot-%{snapshot_date}.tar.gz
 %else
 Source0:        http://downloads.sourceforge.net/mingw-w64/mingw-w64-v%{version}.tar.gz
 %endif
+
+# Backport upstream commit 5451 which contains a fix
+# which is needed to get mingw-qt5-qtbase built
+Patch0:         mingw-w64-commit-5451-dwrite-fix.patch
 
 BuildArch:      noarch
 
@@ -73,6 +77,8 @@ tar -xf %{S:0}
 %setup -q -n mingw-w64-v%{version}
 %endif
 
+%patch0 -p1
+
 
 %build
 pushd mingw-w64-headers
@@ -104,6 +110,9 @@ rm -f $RPM_BUILD_ROOT%{mingw64_includedir}/pthread_unistd.h
 
 
 %changelog
+* Mon Jan 28 2013 Erik van Pienbroek <epienbro@fedoraproject.org> - 2.0.999-0.9.trunk.20121016
+- Backport upstream commit 5451 as it is needed to build mingw-qt5-qtbase
+
 * Wed Oct 24 2012 Erik van Pienbroek <epienbro@fedoraproject.org> - 2.0.999-0.8.trunk.20121016
 - Update to 20121016 snapshot (contains full Cygwin support)
 - Eliminated various manual kludges as upstream now installs their
