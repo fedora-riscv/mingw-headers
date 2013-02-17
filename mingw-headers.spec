@@ -1,4 +1,4 @@
-%global snapshot_date 20130127
+%global snapshot_date 20130216
 %global branch trunk
 
 # The mingw-w64-headers provide the headers pthread_time.h
@@ -13,7 +13,7 @@
 
 Name:           mingw-headers
 Version:        2.0.999
-Release:        0.17.%{branch}.%{snapshot_date}%{?dist}
+Release:        0.18.%{branch}.%{snapshot_date}%{?dist}
 Summary:        Win32/Win64 header files
 
 License:        Public Domain and LGPLv2+ and ZPLv2.1
@@ -104,6 +104,10 @@ rm -f $RPM_BUILD_ROOT%{mingw64_includedir}/pthread_unistd.h
 
 
 %changelog
+* Sat Feb 16 2013 Erik van Pienbroek <epienbro@fedoraproject.org> - 2.0.999-0.18.trunk.20130216
+- Update to 20130216 snapshot
+- Includes improved import libraries (for setupapi, cfgmgr32 and others)
+
 * Sun Jan 27 2013 Erik van Pienbroek <epienbro@fedoraproject.org> - 2.0.999-0.17.trunk.20130127
 - Update to 20130127 snapshot
 
