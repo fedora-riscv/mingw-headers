@@ -1,5 +1,5 @@
 %global snapshot_date 20130614
-%global snapshot_rev 5894
+%global snapshot_rev 5904
 %global branch trunk
 
 # The mingw-w64-headers provide the headers pthread_time.h
@@ -14,7 +14,7 @@
 
 Name:           mingw-headers
 Version:        2.0.999
-Release:        0.26.%{branch}.r%{snapshot_rev}.%{snapshot_date}%{?dist}
+Release:        0.27.%{branch}.r%{snapshot_rev}.%{snapshot_date}%{?dist}
 Summary:        Win32/Win64 header files
 
 License:        Public Domain and LGPLv2+ and ZPLv2.1
@@ -23,7 +23,10 @@ Group:          Development/Libraries
 URL:            http://mingw-w64.sourceforge.net/
 %if 0%{?snapshot_date}
 # To regerenate a snapshot:
-# wget http://sourceforge.net/code-snapshots/svn/m/mi/mingw-w64/code/mingw-w64-code-%{snapshot_rev}-%{branch}.zip -O mingw-w64-%{branch}-r%{snapshot_rev}-snapshot-$(date '+%Y%m%d').tar.gz 
+# Use your regular webbrowser to open http://sourceforge.net/p/mingw-w64/code/5900/tarball?path=/trunk
+# This triggers the SourceForge instructure to generate a snapshot
+# After that you can pull in the archive with:
+# wget http://sourceforge.net/code-snapshots/svn/m/mi/mingw-w64/code/mingw-w64-code-%{snapshot_rev}-%{branch}.zip -O mingw-w64-%{branch}-r%{snapshot_rev}-snapshot-$(date '+%Y%m%d').zip
 Source0:        mingw-w64-%{branch}-r%{snapshot_rev}-snapshot-%{snapshot_date}.zip
 %else
 Source0:        http://downloads.sourceforge.net/mingw-w64/mingw-w64-v%{version}.tar.gz
@@ -105,6 +108,9 @@ rm -f $RPM_BUILD_ROOT%{mingw64_includedir}/pthread_unistd.h
 
 
 %changelog
+* Fri Jun 14 2013 Erik van Pienbroek <epienbro@fedoraproject.org> - 2.0.999-0.27.trunk.r5904.20130614
+- Update to r5904 (fixes various regressions)
+
 * Fri Jun 14 2013 Erik van Pienbroek <epienbro@fedoraproject.org> - 2.0.999-0.26.trunk.r5894.20130614
 - Update to r5894 (20130614 snapshot)
 - Updated instructions to regenerate snapshots
