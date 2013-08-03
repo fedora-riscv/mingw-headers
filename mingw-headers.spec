@@ -14,7 +14,7 @@
 
 Name:           mingw-headers
 Version:        2.0.999
-Release:        0.30.%{branch}.r%{snapshot_rev}.%{snapshot_date}%{?dist}
+Release:        0.31.%{branch}.r%{snapshot_rev}.%{snapshot_date}%{?dist}
 Summary:        Win32/Win64 header files
 
 License:        Public Domain and LGPLv2+ and ZPLv2.1
@@ -108,6 +108,9 @@ rm -f $RPM_BUILD_ROOT%{mingw64_includedir}/pthread_unistd.h
 
 
 %changelog
+* Sat Aug 03 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.0.999-0.31.trunk.r5969.20130721
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_20_Mass_Rebuild
+
 * Sun Jul 21 2013 Erik van Pienbroek <epienbro@fedoraproject.org> - 2.0.999-0.30.trunk.r5969.20130721
 - Update to r5969 (20130721 snapshot)
 - Resolves mingw-boost failure for the i686 target (regarding Interlocked* symbols)
