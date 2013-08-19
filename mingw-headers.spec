@@ -1,5 +1,5 @@
-%global snapshot_date 20130810
-%global snapshot_rev 6069
+%global snapshot_date 20130819
+%global snapshot_rev 6106
 %global branch trunk
 
 # The mingw-w64-headers provide the headers pthread_time.h
@@ -14,7 +14,7 @@
 
 Name:           mingw-headers
 Version:        2.0.999
-Release:        0.32.%{branch}.r%{snapshot_rev}.%{snapshot_date}%{?dist}
+Release:        0.33.%{branch}.r%{snapshot_rev}.%{snapshot_date}%{?dist}
 Summary:        Win32/Win64 header files
 
 License:        Public Domain and LGPLv2+ and ZPLv2.1
@@ -108,6 +108,10 @@ rm -f $RPM_BUILD_ROOT%{mingw64_includedir}/pthread_unistd.h
 
 
 %changelog
+* Mon Aug 19 2013 Erik van Pienbroek <epienbro@fedoraproject.org> - 2.0.999-0.33.trunk.r6106.20130819
+- Update to r6106 (20130819 snapshot)
+- Resolves mingw-gettext build failure (invalid EnumResourceLanguages declaration)
+
 * Sat Aug 10 2013 Erik van Pienbroek <epienbro@fedoraproject.org> - 2.0.999-0.32.trunk.r6069.20130810
 - Update to r6069 (20130810 snapshot)
 - Resolves unnecesary dependency on libgcc_s_sjlj-1.dll for the i686 target
