@@ -1,5 +1,5 @@
-%global snapshot_date 20130827
-%global snapshot_rev 6155
+%global snapshot_date 20130907
+%global snapshot_rev 6230
 %global branch trunk
 
 # The mingw-w64-headers provide the headers pthread_time.h
@@ -14,7 +14,7 @@
 
 Name:           mingw-headers
 Version:        2.0.999
-Release:        0.34.%{branch}.r%{snapshot_rev}.%{snapshot_date}%{?dist}
+Release:        0.35.%{branch}.r%{snapshot_rev}.%{snapshot_date}%{?dist}
 Summary:        Win32/Win64 header files
 
 License:        Public Domain and LGPLv2+ and ZPLv2.1
@@ -26,8 +26,8 @@ URL:            http://mingw-w64.sourceforge.net/
 # Use your regular webbrowser to open http://sourceforge.net/p/mingw-w64/code/%{snapshot_rev}/tarball?path=/trunk
 # This triggers the SourceForge instructure to generate a snapshot
 # After that you can pull in the archive with:
-# wget http://sourceforge.net/code-snapshots/svn/m/mi/mingw-w64/code/mingw-w64-code-%{snapshot_rev}-%{branch}.zip
-Source0:        mingw-w64-code-%{snapshot_rev}-%{branch}.zip
+# spectool -g mingw-headers.spec
+Source0:        http://sourceforge.net/code-snapshots/svn/m/mi/mingw-w64/code/mingw-w64-code-%{snapshot_rev}-%{branch}.zip
 %else
 Source0:        http://downloads.sourceforge.net/mingw-w64/mingw-w64-v%{version}.tar.gz
 %endif
@@ -91,8 +91,10 @@ popd
 
 # Drop the dummy pthread headers if necessary
 %if 0%{?bundle_dummy_pthread_headers} == 0
+rm -f $RPM_BUILD_ROOT%{mingw32_includedir}/pthread_signal.h
 rm -f $RPM_BUILD_ROOT%{mingw32_includedir}/pthread_time.h
 rm -f $RPM_BUILD_ROOT%{mingw32_includedir}/pthread_unistd.h
+rm -f $RPM_BUILD_ROOT%{mingw32_includedir}/pthread_signal.h
 rm -f $RPM_BUILD_ROOT%{mingw64_includedir}/pthread_time.h
 rm -f $RPM_BUILD_ROOT%{mingw64_includedir}/pthread_unistd.h
 %endif
@@ -108,6 +110,10 @@ rm -f $RPM_BUILD_ROOT%{mingw64_includedir}/pthread_unistd.h
 
 
 %changelog
+* Sat Sep  7 2013 Erik van Pienbroek <epienbro@fedoraproject.org> - 2.0.999-0.35.trunk.r6230.20130907
+- Update to r6230 (20130907 snapshot)
+- Fix compatibility with latest mingw-winpthreads
+
 * Tue Aug 27 2013 Erik van Pienbroek <epienbro@fedoraproject.org> - 2.0.999-0.34.trunk.r6155.20130827
 - Update to r6155 (20130827 snapshot)
 - Fixes duplicate declaration of PRINTEROP_FLAGS (mingw-nsis)
