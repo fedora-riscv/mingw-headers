@@ -1,5 +1,5 @@
 %global snapshot_date 20130907
-%global snapshot_rev 6230
+%global snapshot_rev 6233
 %global branch trunk
 
 # The mingw-w64-headers provide the headers pthread_time.h
@@ -110,8 +110,8 @@ rm -f $RPM_BUILD_ROOT%{mingw64_includedir}/pthread_unistd.h
 
 
 %changelog
-* Sat Sep  7 2013 Erik van Pienbroek <epienbro@fedoraproject.org> - 2.0.999-0.35.trunk.r6230.20130907
-- Update to r6230 (20130907 snapshot)
+* Sat Sep  7 2013 Erik van Pienbroek <epienbro@fedoraproject.org> - 2.0.999-0.35.trunk.r6233.20130907
+- Update to r6233 (20130907 snapshot)
 - Fix compatibility with latest mingw-winpthreads
 
 * Tue Aug 27 2013 Erik van Pienbroek <epienbro@fedoraproject.org> - 2.0.999-0.34.trunk.r6155.20130827
