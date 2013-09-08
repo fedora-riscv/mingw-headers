@@ -94,7 +94,7 @@ popd
 rm -f $RPM_BUILD_ROOT%{mingw32_includedir}/pthread_signal.h
 rm -f $RPM_BUILD_ROOT%{mingw32_includedir}/pthread_time.h
 rm -f $RPM_BUILD_ROOT%{mingw32_includedir}/pthread_unistd.h
-rm -f $RPM_BUILD_ROOT%{mingw32_includedir}/pthread_signal.h
+rm -f $RPM_BUILD_ROOT%{mingw64_includedir}/pthread_signal.h
 rm -f $RPM_BUILD_ROOT%{mingw64_includedir}/pthread_time.h
 rm -f $RPM_BUILD_ROOT%{mingw64_includedir}/pthread_unistd.h
 %endif
