@@ -1,5 +1,5 @@
-%global snapshot_date 20130907
-%global snapshot_rev 6233
+%global snapshot_date 20130909
+%global snapshot_rev 6258
 %global branch trunk
 
 # The mingw-w64-headers provide the headers pthread_time.h
@@ -14,7 +14,7 @@
 
 Name:           mingw-headers
 Version:        2.0.999
-Release:        0.35.%{branch}.r%{snapshot_rev}.%{snapshot_date}%{?dist}
+Release:        0.36.%{branch}.r%{snapshot_rev}.%{snapshot_date}%{?dist}
 Summary:        Win32/Win64 header files
 
 License:        Public Domain and LGPLv2+ and ZPLv2.1
@@ -110,6 +110,11 @@ rm -f $RPM_BUILD_ROOT%{mingw64_includedir}/pthread_unistd.h
 
 
 %changelog
+* Mon Sep  9 2013 Erik van Pienbroek <epienbro@fedoraproject.org> - 2.0.999-0.36.trunk.r6258.20130909
+- Update to r6258 (20130909 snapshot)
+- Fixes various UOW related build failures
+- Fixed multiple definition of FreeIDListArray failures
+
 * Sat Sep  7 2013 Erik van Pienbroek <epienbro@fedoraproject.org> - 2.0.999-0.35.trunk.r6233.20130907
 - Update to r6233 (20130907 snapshot)
 - Fix compatibility with latest mingw-winpthreads
