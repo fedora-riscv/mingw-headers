@@ -1,6 +1,6 @@
-%global snapshot_date 20130914
-%global snapshot_rev 6284
-%global branch trunk
+#%%global snapshot_date 20130914
+#%%global snapshot_rev 6284
+#%%global branch trunk
 
 # The mingw-w64-headers provide the headers pthread_time.h
 # and pthread_unistd.h by default and are dummy headers.
@@ -10,11 +10,16 @@
 # the flag below needs to be set to 1. When winpthreads is
 # available then this flag needs to be set to 0 to avoid
 # a file conflict with the winpthreads headers
+# Winpthreads is available as of Fedora 20
+%if %{?fedora} >= 20
+%global bundle_dummy_pthread_headers 0
+%else
 %global bundle_dummy_pthread_headers 1
+%endif
 
 Name:           mingw-headers
-Version:        2.0.999
-Release:        0.38.%{branch}.r%{snapshot_rev}.%{snapshot_date}%{?dist}
+Version:        3.0.0
+Release:        1%{?dist}
 Summary:        Win32/Win64 header files
 
 License:        Public Domain and LGPLv2+ and ZPLv2.1
@@ -29,7 +34,7 @@ URL:            http://mingw-w64.sourceforge.net/
 # spectool -g mingw-headers.spec
 Source0:        http://sourceforge.net/code-snapshots/svn/m/mi/mingw-w64/code/mingw-w64-code-%{snapshot_rev}-%{branch}.zip
 %else
-Source0:        http://downloads.sourceforge.net/mingw-w64/mingw-w64-v%{version}.tar.gz
+Source0:        http://downloads.sourceforge.net/mingw-w64/mingw-w64-v%{version}.tar.bz2
 %endif
 
 BuildArch:      noarch
@@ -110,6 +115,10 @@ rm -f $RPM_BUILD_ROOT%{mingw64_includedir}/pthread_unistd.h
 
 
 %changelog
+* Fri Sep 20 2013 Erik van Pienbroek <epienbro@fedoraproject.org> - 3.0.0-1
+- Update to 3.0.0
+- Enable support for winpthreads (F20+)
+
 * Sat Sep 14 2013 Erik van Pienbroek <epienbro@fedoraproject.org> - 2.0.999-0.38.trunk.r6284.20130914
 - Update to r6284 (20130914 snapshot)
 - Fixes 'VARIANT' has no member named 'bstrVal' errors (mingw-tk)
