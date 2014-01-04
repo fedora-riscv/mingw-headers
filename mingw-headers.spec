@@ -1,5 +1,5 @@
-%global snapshot_date 20131129
-%global snapshot_rev 6388
+%global snapshot_date 20140104
+%global snapshot_rev 6432
 %global branch trunk
 
 # The mingw-w64-headers provide the headers pthread_time.h
@@ -19,7 +19,7 @@
 
 Name:           mingw-headers
 Version:        3.0.999
-Release:        0.2.%{branch}.r%{snapshot_rev}.%{snapshot_date}%{?dist}
+Release:        0.3.%{branch}.r%{snapshot_rev}.%{snapshot_date}%{?dist}
 Summary:        Win32/Win64 header files
 
 License:        Public Domain and LGPLv2+ and ZPLv2.1
@@ -115,6 +115,9 @@ rm -f $RPM_BUILD_ROOT%{mingw64_includedir}/pthread_unistd.h
 
 
 %changelog
+* Sat Jan  4 2014 Erik van Pienbroek <epienbro@fedoraproject.org> - 3.0.999-0.3.trunk.r6432.20140104
+- Update to r6432 (20140104 snapshot)
+
 * Fri Nov 29 2013 Erik van Pienbroek <epienbro@fedoraproject.org> - 3.0.999-0.2.trunk.r6388.20131129
 - Update to r6388 (20131129 snapshot)
 - Fixes compile failure in mingw-qt5-qtserialport (regarding setupapi.h header)
