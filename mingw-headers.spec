@@ -18,8 +18,8 @@
 %endif
 
 Name:           mingw-headers
-Version:        3.0.999
-Release:        0.3.%{branch}.r%{snapshot_rev}.%{snapshot_date}%{?dist}
+Version:        3.1.999
+Release:        0.1.%{branch}.r%{snapshot_rev}.%{snapshot_date}%{?dist}
 Summary:        Win32/Win64 header files
 
 License:        Public Domain and LGPLv2+ and ZPLv2.1
@@ -115,6 +115,9 @@ rm -f $RPM_BUILD_ROOT%{mingw64_includedir}/pthread_unistd.h
 
 
 %changelog
+* Thu Jan  9 2014 Erik van Pienbroek <epienbro@fedoraproject.org> - 3.1.999-0.1.trunk.r6432.20140104
+- Bump version to keep working upgrade path
+
 * Sat Jan  4 2014 Erik van Pienbroek <epienbro@fedoraproject.org> - 3.0.999-0.3.trunk.r6432.20140104
 - Update to r6432 (20140104 snapshot)
 
