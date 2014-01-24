@@ -1,5 +1,5 @@
-%global snapshot_date 20140104
-%global snapshot_rev 6432
+%global snapshot_date 20140124
+%global snapshot_rev 6460
 %global branch trunk
 
 # The mingw-w64-headers provide the headers pthread_time.h
@@ -11,7 +11,7 @@
 # available then this flag needs to be set to 0 to avoid
 # a file conflict with the winpthreads headers
 # Winpthreads is available as of Fedora 20
-%if %{?fedora} >= 20
+%if 0%{?fedora} >= 20
 %global bundle_dummy_pthread_headers 0
 %else
 %global bundle_dummy_pthread_headers 1
@@ -19,7 +19,7 @@
 
 Name:           mingw-headers
 Version:        3.1.999
-Release:        0.1.%{branch}.r%{snapshot_rev}.%{snapshot_date}%{?dist}
+Release:        0.2.%{branch}.r%{snapshot_rev}.%{snapshot_date}%{?dist}
 Summary:        Win32/Win64 header files
 
 License:        Public Domain and LGPLv2+ and ZPLv2.1
@@ -115,6 +115,9 @@ rm -f $RPM_BUILD_ROOT%{mingw64_includedir}/pthread_unistd.h
 
 
 %changelog
+* Fri Jan 24 2014 Erik van Pienbroek <epienbro@fedoraproject.org> - 3.1.999-0.2.trunk.r6460.20140124
+- Update to r6460 (20140104 snapshot)
+
 * Thu Jan  9 2014 Erik van Pienbroek <epienbro@fedoraproject.org> - 3.1.999-0.1.trunk.r6432.20140104
 - Bump version to keep working upgrade path
 
