@@ -116,7 +116,7 @@ rm -f $RPM_BUILD_ROOT%{mingw64_includedir}/pthread_unistd.h
 
 %changelog
 * Fri Jan 24 2014 Erik van Pienbroek <epienbro@fedoraproject.org> - 3.1.999-0.2.trunk.r6460.20140124
-- Update to r6460 (20140104 snapshot)
+- Update to r6460 (20140124 snapshot)
 
 * Thu Jan  9 2014 Erik van Pienbroek <epienbro@fedoraproject.org> - 3.1.999-0.1.trunk.r6432.20140104
 - Bump version to keep working upgrade path
