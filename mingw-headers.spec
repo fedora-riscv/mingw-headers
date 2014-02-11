@@ -19,7 +19,7 @@
 
 Name:           mingw-headers
 Version:        3.1.999
-Release:        0.5.%{branch}.r%{snapshot_rev}.%{snapshot_date}%{?dist}
+Release:        0.6.%{branch}.r%{snapshot_rev}.%{snapshot_date}%{?dist}
 Summary:        Win32/Win64 header files
 
 License:        Public Domain and LGPLv2+ and ZPLv2.1
