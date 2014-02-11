@@ -1,5 +1,5 @@
-%global snapshot_date 20140210
-%global snapshot_rev 6477
+%global snapshot_date 20140211
+%global snapshot_rev 6479
 %global branch trunk
 
 # The mingw-w64-headers provide the headers pthread_time.h
@@ -115,8 +115,12 @@ rm -f $RPM_BUILD_ROOT%{mingw64_includedir}/pthread_unistd.h
 
 
 %changelog
+* Tue Feb 11 2014 Erik van Pienbroek <epienbro@fedoraproject.org> - 3.1.999-0.6.trunk.r6479.20140210
+- Update to r6479 (20140211 snapshot)
+- Fixes another math.h issue
+
 * Mon Feb 10 2014 Erik van Pienbroek <epienbro@fedoraproject.org> - 3.1.999-0.5.trunk.r6477.20140210
-- Update to r6477
+- Update to r6477 (20140210 snapshot)
 - Fixes broken math.h when using C++ (RHBZ #1061443)
 
 * Sat Feb  8 2014 Erik van Pienbroek <epienbro@fedoraproject.org> - 3.1.999-0.4.trunk.r6475.20140208
