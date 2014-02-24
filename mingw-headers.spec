@@ -1,5 +1,5 @@
-%global snapshot_date 20140211
-%global snapshot_rev 6479
+%global snapshot_date 20140224
+%global snapshot_rev 6497
 %global branch trunk
 
 # The mingw-w64-headers provide the headers pthread_time.h
@@ -19,7 +19,7 @@
 
 Name:           mingw-headers
 Version:        3.1.999
-Release:        0.6.%{branch}.r%{snapshot_rev}.%{snapshot_date}%{?dist}
+Release:        0.7.%{branch}.r%{snapshot_rev}.%{snapshot_date}%{?dist}
 Summary:        Win32/Win64 header files
 
 License:        Public Domain and LGPLv2+ and ZPLv2.1
@@ -115,7 +115,10 @@ rm -f $RPM_BUILD_ROOT%{mingw64_includedir}/pthread_unistd.h
 
 
 %changelog
-* Tue Feb 11 2014 Erik van Pienbroek <epienbro@fedoraproject.org> - 3.1.999-0.6.trunk.r6479.20140210
+* Mon Feb 24 2014 Erik van Pienbroek <epienbro@fedoraproject.org> - 3.1.999-0.7.trunk.r6497.20140224
+- Update to r6497 (20140224 snapshot)
+
+* Tue Feb 11 2014 Erik van Pienbroek <epienbro@fedoraproject.org> - 3.1.999-0.6.trunk.r6479.20140211
 - Update to r6479 (20140211 snapshot)
 - Fixes another math.h issue
 
