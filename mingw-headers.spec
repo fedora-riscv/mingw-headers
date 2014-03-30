@@ -37,6 +37,12 @@ Source0:        http://sourceforge.net/code-snapshots/svn/m/mi/mingw-w64/code/mi
 Source0:        http://downloads.sourceforge.net/mingw-w64/mingw-w64-v%{version}.tar.bz2
 %endif
 
+# Our RPM macros automatically set the environment variable WIDL
+# This confuses the mingw-headers configure scripts and causes various
+# headers to be regenerated from their .idl source. Prevent this from
+# happening as the .idl files shouldn't be used by default
+Patch0:         mingw-headers-no-widl.patch
+
 BuildArch:      noarch
 
 BuildRequires:  mingw32-filesystem >= 95
@@ -82,6 +88,8 @@ unzip %{S:0}
 %setup -q -n mingw-w64-v%{version}
 %endif
 
+%patch0 -p0 -b .idl
+
 
 %build
 pushd mingw-w64-headers
@@ -117,6 +125,9 @@ rm -f $RPM_BUILD_ROOT%{mingw64_includedir}/pthread_unistd.h
 %changelog
 * Sun Mar 30 2014 Erik van Pienbroek <epienbro@fedoraproject.org> - 3.1.999-0.8.trunk.r6559.20140330
 - Update to r6559 (20140330 snapshot)
+- Prevent headers to be regenerated from IDL
+  Fixes build failure when the environment variable WIDL is set
+  (which happens automatically when mingw-w64-tools is installed)
 
 * Mon Feb 24 2014 Erik van Pienbroek <epienbro@fedoraproject.org> - 3.1.999-0.7.trunk.r6497.20140224
 - Update to r6497 (20140224 snapshot)
