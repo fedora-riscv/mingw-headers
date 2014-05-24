@@ -1,5 +1,6 @@
-%global snapshot_date 20140330
-%global snapshot_rev 6559
+%global snapshot_date 20140524
+%global snapshot_rev 502c72047e68fecf07f628628b75296863ff5b35
+%global snapshot_rev_short %(echo %snapshot_rev | cut -c1-6)
 %global branch trunk
 
 # The mingw-w64-headers provide the headers pthread_time.h
@@ -19,7 +20,7 @@
 
 Name:           mingw-headers
 Version:        3.1.999
-Release:        0.8.%{branch}.r%{snapshot_rev}.%{snapshot_date}%{?dist}
+Release:        0.9.%{branch}.git%{snapshot_rev_short}.%{snapshot_date}%{?dist}
 Summary:        Win32/Win64 header files
 
 License:        Public Domain and LGPLv2+ and ZPLv2.1
@@ -28,11 +29,11 @@ Group:          Development/Libraries
 URL:            http://mingw-w64.sourceforge.net/
 %if 0%{?snapshot_date}
 # To regerenate a snapshot:
-# Use your regular webbrowser to open http://sourceforge.net/p/mingw-w64/code/%{snapshot_rev}/tarball?path=/trunk
+# Use your regular webbrowser to open https://sourceforge.net/p/mingw-w64/mingw-w64/ci/%{snapshot_rev}/tarball
 # This triggers the SourceForge instructure to generate a snapshot
 # After that you can pull in the archive with:
 # spectool -g mingw-headers.spec
-Source0:        http://sourceforge.net/code-snapshots/svn/m/mi/mingw-w64/code/mingw-w64-code-%{snapshot_rev}-%{branch}.zip
+Source0:        http://sourceforge.net/code-snapshots/git/m/mi/mingw-w64/mingw-w64.git/mingw-w64-mingw-w64-%{snapshot_rev}.zip
 %else
 Source0:        http://downloads.sourceforge.net/mingw-w64/mingw-w64-v%{version}.tar.bz2
 %endif
@@ -83,7 +84,7 @@ rm -rf mingw-w64-v%{version}
 mkdir mingw-w64-v%{version}
 cd mingw-w64-v%{version}
 unzip %{S:0}
-%setup -q -D -T -n mingw-w64-v%{version}/mingw-w64-code-%{snapshot_rev}-%{branch}
+%setup -q -D -T -n mingw-w64-v%{version}/mingw-w64-mingw-w64-%{snapshot_rev}
 %else
 %setup -q -n mingw-w64-v%{version}
 %endif
@@ -123,6 +124,10 @@ rm -f $RPM_BUILD_ROOT%{mingw64_includedir}/pthread_unistd.h
 
 
 %changelog
+* Sat May 24 2014 Erik van Pienbroek <epienbro@fedoraproject.org> - 3.1.999-0.9.trunk.git502c72.20140524
+- Update to 20140524 snapshot (git rev 502c72)
+- Upstream has switched from SVN to Git
+
 * Sun Mar 30 2014 Erik van Pienbroek <epienbro@fedoraproject.org> - 3.1.999-0.8.trunk.r6559.20140330
 - Update to r6559 (20140330 snapshot)
 - Prevent headers to be regenerated from IDL
