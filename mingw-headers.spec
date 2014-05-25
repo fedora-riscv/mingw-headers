@@ -12,7 +12,7 @@
 # available then this flag needs to be set to 0 to avoid
 # a file conflict with the winpthreads headers
 # Winpthreads is available as of Fedora 20
-%if 0%{?fedora} >= 20
+%if 0%{?fedora} >= 20 || 0%{?rhel} >= 7
 %global bundle_dummy_pthread_headers 0
 %else
 %global bundle_dummy_pthread_headers 1
