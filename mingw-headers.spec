@@ -20,7 +20,7 @@
 
 Name:           mingw-headers
 Version:        3.1.999
-Release:        0.10.%{branch}.git%{snapshot_rev_short}.%{snapshot_date}%{?dist}
+Release:        0.11.%{branch}.git%{snapshot_rev_short}.%{snapshot_date}%{?dist}
 Summary:        Win32/Win64 header files
 
 License:        Public Domain and LGPLv2+ and ZPLv2.1
@@ -124,6 +124,9 @@ rm -f $RPM_BUILD_ROOT%{mingw64_includedir}/pthread_unistd.h
 
 
 %changelog
+* Sat Jun 07 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 3.1.999-0.11.trunk.gitb8e816.20140530
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_21_Mass_Rebuild
+
 * Fri May 30 2014 Erik van Pienbroek <epienbro@fedoraproject.org> - 3.1.999-0.10.trunk.gitb8e8160.20140530
 - Update to 20140530 snapshot (git rev b8e8160)
 - Fixes initializer issue in IN6ADDR macros (RHBZ #1067426)
