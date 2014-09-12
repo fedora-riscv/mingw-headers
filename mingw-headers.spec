@@ -1,5 +1,5 @@
-%global snapshot_date 20140730
-%global snapshot_rev ec1ff7764fbea4eefbb290c9ba888af3386ede8e
+%global snapshot_date 20140912
+%global snapshot_rev b08afbb5768898ae9c6d0d2798aaccf4f21de361
 %global snapshot_rev_short %(echo %snapshot_rev | cut -c1-6)
 %global branch trunk
 
@@ -19,8 +19,8 @@
 %endif
 
 Name:           mingw-headers
-Version:        3.1.999
-Release:        0.12.%{branch}.git%{snapshot_rev_short}.%{snapshot_date}%{?dist}
+Version:        3.9.999
+Release:        0.1.%{branch}.git.%{snapshot_rev_short}.%{snapshot_date}%{?dist}
 Summary:        Win32/Win64 header files
 
 License:        Public Domain and LGPLv2+ and ZPLv2.1
@@ -124,6 +124,10 @@ rm -f $RPM_BUILD_ROOT%{mingw64_includedir}/pthread_unistd.h
 
 
 %changelog
+* Fri Sep 12 2014 Erik van Pienbroek <epienbro@fedoraproject.org> - 3.9.999-0.1.trunk.git.b08afb.20140912
+- Update to 20140912 snapshot (git rev b08afb)
+- Bump version as upstream released mingw-w64 v3.2.0 recently (which is not based on the trunk branch)
+
 * Wed Jul 30 2014 Erik van Pienbroek <epienbro@fedoraproject.org> - 3.1.999-0.12.trunk.gitec1ff7.20140730
 - Update to 20140730 snapshot (git rev ec1ff7)
 
