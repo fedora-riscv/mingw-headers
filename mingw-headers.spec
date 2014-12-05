@@ -1,5 +1,5 @@
-%global snapshot_date 20141203
-%global snapshot_rev a5c151e498a8bff9cf2da51b65fa79b65881f71e
+%global snapshot_date 20141205
+%global snapshot_rev 63dba27341bc2c90c76208765909d560d1ef9978
 %global snapshot_rev_short %(echo %snapshot_rev | cut -c1-6)
 %global branch trunk
 
@@ -20,7 +20,7 @@
 
 Name:           mingw-headers
 Version:        3.9.999
-Release:        0.2.%{branch}.git.%{snapshot_rev_short}.%{snapshot_date}%{?dist}
+Release:        0.3.%{branch}.git.%{snapshot_rev_short}.%{snapshot_date}%{?dist}
 Summary:        Win32/Win64 header files
 
 License:        Public Domain and LGPLv2+ and ZPLv2.1
@@ -124,6 +124,9 @@ rm -f $RPM_BUILD_ROOT%{mingw64_includedir}/pthread_unistd.h
 
 
 %changelog
+* Fri Dec  5 2014 Erik van Pienbroek <epienbro@fedoraproject.org> - 3.9.999-0.3.trunk.git.63dba2.20141205
+- Update to 20141205 snapshot (git rev 63dba2)
+
 * Wed Dec  3 2014 Erik van Pienbroek <epienbro@fedoraproject.org> - 3.9.999-0.2.trunk.git.a5c151.20141203
 - Update to 20141203 snapshot (git rev a5c151)
 
