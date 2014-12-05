@@ -18,7 +18,7 @@
 %endif
 
 Name:           mingw-headers
-Version:        3.2.0
+Version:        3.3.0
 Release:        1%{?dist}
 Summary:        Win32/Win64 header files
 
@@ -41,6 +41,10 @@ BuildArch:      noarch
 
 BuildRequires:  mingw32-filesystem >= 95
 BuildRequires:  mingw64-filesystem >= 95
+
+# Backported upstream commit ea45fb357054ae502f46728b6a951a96d262dcb6
+# (add tsattrs.h header) as this is required by the most recent mingw-wine-gecko
+Patch0:         commit-ea45fb3
 
 
 %description
@@ -82,6 +86,8 @@ unzip %{S:0}
 %setup -q -n mingw-w64-v%{version}
 %endif
 
+%patch0 -p1
+
 
 %build
 pushd mingw-w64-headers
@@ -115,6 +121,11 @@ rm -f $RPM_BUILD_ROOT%{mingw64_includedir}/pthread_unistd.h
 
 
 %changelog
+* Fri Dec  5 2014 Erik van Pienbroek <epienbro@fedoraproject.org> - 3.3.0-1
+- Update to 3.3.0
+- Backported upstream commit ea45fb3 (add tsattrs.h header)
+  as this is required by the most recent mingw-wine-gecko
+
 * Mon Sep  1 2014 Erik van Pienbroek <epienbro@fedoraproject.org> - 3.2.0-1
 - Update to 3.2.0
 
