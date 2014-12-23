@@ -13,14 +13,14 @@
 # a file conflict with the winpthreads headers
 # Winpthreads is available as of Fedora 20
 %if 0%{?fedora} >= 20 || 0%{?rhel} >= 6
-%global bundle_dummy_pthread_headers 0
+%global bundle_dummy_pthread_headers 1
 %else
 %global bundle_dummy_pthread_headers 1
 %endif
 
 Name:           mingw-headers
 Version:        3.3.0
-Release:        1%{?dist}
+Release:        0%{?dist}
 Summary:        Win32/Win64 header files
 
 License:        Public Domain and LGPLv2+ and ZPLv2.1
