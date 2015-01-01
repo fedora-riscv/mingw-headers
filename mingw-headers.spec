@@ -19,7 +19,7 @@
 
 Name:           mingw-headers
 Version:        3.3.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Win32/Win64 header files
 
 License:        Public Domain and LGPLv2+ and ZPLv2.1
@@ -42,9 +42,33 @@ BuildArch:      noarch
 BuildRequires:  mingw32-filesystem >= 95
 BuildRequires:  mingw64-filesystem >= 95
 
-# Backported upstream commit ea45fb357054ae502f46728b6a951a96d262dcb6
-# (add tsattrs.h header) as this is required by the most recent mingw-wine-gecko
-Patch0:         commit-ea45fb3
+# Backported various upstream commits which are required to build
+# the most recent mingw-wine-gecko and mingw-angleproject
+Patch1:         0001-mfapi.h-Moved-MFCreateAttributes-to-mfapi.h-where-it.patch
+Patch2:         0002-Update-mfobjects-interface-for-winapi-family-and-W8.patch
+Patch3:         0003-Updated-imported-headers-to-current-Wine-version.patch
+Patch4:         0004-Updated-headers-imported-from-Wine.patch
+Patch5:         0005-winerror.h-Added-some-missing-error-codes.patch
+Patch6:         0006-d2d1_1helper.h-Added-some-missing-helpers.patch
+Patch7:         0007-d2d1effects.h-Added-some-missing-declarations.patch
+Patch8:         0008-winsdkver.h-Added-new-header.patch
+Patch9:         0009-dwrite_1.h-Added-new-header-file.patch
+Patch10:        0010-Added-some-missing-WMF-declarations.patch
+Patch11:        0011-mstcpip.h-Declare-RtlIpv6-functions-only-if-ws2ipdef.patch
+Patch12:        0012-Added-dxgi1_2.h-missing-in-previous-commit.patch
+Patch13:        0013-Updated-imported-headers-to-current-Wine-version.patch
+Patch14:        0014-tsattrs.h-Added-new-header-file.patch
+Patch15:        0015-Add-winapifamily-check-correct-enumerator-values-add.patch
+Patch16:        0016-Add-comadmin.idl-to-Makefile.am-and-regenerate-files.patch
+Patch17:        0017-Updated-imported-headers-to-current-Wine-version.patch
+Patch18:        0018-Updated-imported-headers-to-current-Wine-version.patch
+Patch19:        0019-Updated-imported-headers-to-current-Wine-version.patch
+Patch20:        0020-Fixed-some-version-guards.patch
+Patch21:        0021-Lower-_WIN32_WINNT-requirements-for-Un-RegisterPower.patch
+Patch22:        0022-dwrite.h-Don-t-duplicate-parent-interface-methods-fo.patch
+Patch23:        0023-string_s.h-wchar_s.h-Added-wcsnlen_s-implementation.patch
+Patch24:        0024-Use-__forceinline-for-wcsnlen_s-implementation.patch
+Patch25:        0025-Implement-IDXGIDevice1.patch
 
 
 %description
@@ -86,7 +110,31 @@ unzip %{S:0}
 %setup -q -n mingw-w64-v%{version}
 %endif
 
-%patch0 -p1
+%patch1 -p1
+%patch2 -p1
+%patch3 -p1
+%patch4 -p1
+%patch5 -p1
+%patch6 -p1
+%patch7 -p1
+%patch8 -p1
+%patch9 -p1
+%patch10 -p1
+%patch11 -p1
+%patch12 -p1
+%patch13 -p1
+%patch14 -p1
+%patch15 -p1
+%patch16 -p1
+%patch17 -p1
+%patch18 -p1
+%patch19 -p1
+%patch20 -p1
+%patch21 -p1
+%patch22 -p1
+%patch23 -p1
+%patch24 -p1
+%patch25 -p1
 
 
 %build
@@ -121,6 +169,10 @@ rm -f $RPM_BUILD_ROOT%{mingw64_includedir}/pthread_unistd.h
 
 
 %changelog
+* Wed Dec 31 2014 Erik van Pienbroek <epienbro@fedoraproject.org> - 3.3.0-2
+- Backport various upstream commits which are required to build
+  the most recent mingw-wine-gecko and mingw-angleproject
+
 * Fri Dec  5 2014 Erik van Pienbroek <epienbro@fedoraproject.org> - 3.3.0-1
 - Update to 3.3.0
 - Backported upstream commit ea45fb3 (add tsattrs.h header)

@@ -1,0 +1,39 @@
+From f09cf32b881e9501f81825960961b3ae8ee97ee7 Mon Sep 17 00:00:00 2001
+From: Jacek Caban <jacek@codeweavers.com>
+Date: Thu, 21 Aug 2014 14:23:50 +0200
+Subject: [PATCH 24/25] Use __forceinline for wcsnlen_s implementation.
+
+---
+ mingw-w64-headers/crt/sec_api/string_s.h | 2 +-
+ mingw-w64-headers/crt/sec_api/wchar_s.h  | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/mingw-w64-headers/crt/sec_api/string_s.h b/mingw-w64-headers/crt/sec_api/string_s.h
+index 171efe7..11d493a 100644
+--- a/mingw-w64-headers/crt/sec_api/string_s.h
++++ b/mingw-w64-headers/crt/sec_api/string_s.h
+@@ -56,7 +56,7 @@ extern "C" {
+   _CRTIMP errno_t __cdecl _wcsset_s_l(wchar_t *_Str,size_t _SizeInChars,unsigned int _Val,_locale_t _Locale);
+   _CRTIMP errno_t __cdecl _wcsnset_s_l(wchar_t *_Str,size_t _SizeInChars,unsigned int _Val, size_t _Count,_locale_t _Locale);
+ 
+-  extern inline size_t __cdecl wcsnlen_s(const wchar_t * _src, size_t _count) {
++  __forceinline size_t __cdecl wcsnlen_s(const wchar_t * _src, size_t _count) {
+     return _src ? wcsnlen(_src, _count) : 0;
+   }
+ #endif
+diff --git a/mingw-w64-headers/crt/sec_api/wchar_s.h b/mingw-w64-headers/crt/sec_api/wchar_s.h
+index 6354d17..0d39626 100644
+--- a/mingw-w64-headers/crt/sec_api/wchar_s.h
++++ b/mingw-w64-headers/crt/sec_api/wchar_s.h
+@@ -128,7 +128,7 @@ extern "C" {
+   _CRTIMP errno_t __cdecl _wcsset_s_l(wchar_t *_Str,size_t _SizeInChars,unsigned int _Val,_locale_t _Locale);
+   _CRTIMP errno_t __cdecl _wcsnset_s_l(wchar_t *_Str,size_t _SizeInChars,unsigned int _Val, size_t _Count,_locale_t _Locale);
+ 
+-  extern inline size_t __cdecl wcsnlen_s(const wchar_t * _src, size_t _count) {
++  __forceinline size_t __cdecl wcsnlen_s(const wchar_t * _src, size_t _count) {
+     return _src ? wcsnlen(_src, _count) : 0;
+   }
+ #endif
+-- 
+2.1.0
+

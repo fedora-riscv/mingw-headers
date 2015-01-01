@@ -1,0 +1,30 @@
+From 8269507a53e48bd584db5fa6a8d174681800e893 Mon Sep 17 00:00:00 2001
+From: Erik van Pienbroek <epienbro@fedoraproject.org>
+Date: Wed, 31 Dec 2014 18:44:01 +0100
+Subject: [PATCH 21/25] Lower _WIN32_WINNT requirements for
+ {Un,}RegisterPowerSettingNotification
+
+This got changed in master in commit b354505ea8a1b93558c7941db2d94a949b922ecd
+Perhaps this change was done by accident as the MSDN documentation at
+http://msdn.microsoft.com/en-us/library/windows/desktop/aa373196%28v=vs.85%29.aspx
+indicates that these functions are only available as of Windows Vista
+---
+ mingw-w64-headers/include/winuser.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/mingw-w64-headers/include/winuser.h b/mingw-w64-headers/include/winuser.h
+index 975b00d..0f1f8cd 100644
+--- a/mingw-w64-headers/include/winuser.h
++++ b/mingw-w64-headers/include/winuser.h
+@@ -1877,7 +1877,7 @@ extern "C" {
+ 
+   WINUSERAPI HDEVNOTIFY WINAPI RegisterDeviceNotificationA(HANDLE hRecipient,LPVOID NotificationFilter,DWORD Flags);
+   WINUSERAPI HDEVNOTIFY WINAPI RegisterDeviceNotificationW(HANDLE hRecipient,LPVOID NotificationFilter,DWORD Flags);
+-#if (_WIN32_WINNT >= 0x0600)
++#if (_WIN32_WINNT >= 0x0502)
+   WINUSERAPI HPOWERNOTIFY WINAPI RegisterPowerSettingNotification(HANDLE hRecipient,LPCGUID PowerSettingGuid,DWORD Flags);
+   WINUSERAPI WINBOOL WINAPI UnregisterPowerSettingNotification(HPOWERNOTIFY Handle);
+ #endif
+-- 
+2.1.0
+

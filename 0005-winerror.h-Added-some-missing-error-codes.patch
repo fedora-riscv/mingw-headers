@@ -1,0 +1,30 @@
+From a1b89708ca86535c7ec974eb27adb7daf6a4b3f4 Mon Sep 17 00:00:00 2001
+From: Jacek Caban <cjacek@gmail.com>
+Date: Mon, 17 Mar 2014 08:53:14 +0000
+Subject: [PATCH 05/25] winerror.h: Added some missing error codes.
+
+git-svn-id: svn+ssh://svn.code.sf.net/p/mingw-w64/code/trunk@6529 4407c894-4637-0410-b4f5-ada5f102cad1
+---
+ mingw-w64-headers/include/winerror.h | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/mingw-w64-headers/include/winerror.h b/mingw-w64-headers/include/winerror.h
+index ee383e6..b424b27 100644
+--- a/mingw-w64-headers/include/winerror.h
++++ b/mingw-w64-headers/include/winerror.h
+@@ -211,6 +211,12 @@
+ #define ERROR_EXE_MACHINE_TYPE_MISMATCH __MSABI_LONG(216)
+ #define ERROR_EXE_CANNOT_MODIFY_SIGNED_BINARY __MSABI_LONG(217)
+ #define ERROR_EXE_CANNOT_MODIFY_STRONG_SIGNED_BINARY __MSABI_LONG(218)
++#define ERROR_FILE_CHECKED_OUT __MSABI_LONG(220)
++#define ERROR_CHECKOUT_REQUIRED __MSABI_LONG(221)
++#define ERROR_BAD_FILE_TYPE __MSABI_LONG(222)
++#define ERROR_FILE_TOO_LARGE __MSABI_LONG(223)
++#define ERROR_FORMS_AUTH_REQUIRED __MSABI_LONG(224)
++#define ERROR_PIPE_LOCAL __MSABI_LONG(229)
+ #define ERROR_BAD_PIPE __MSABI_LONG(230)
+ #define ERROR_PIPE_BUSY __MSABI_LONG(231)
+ #define ERROR_NO_DATA __MSABI_LONG(232)
+-- 
+2.1.0
+

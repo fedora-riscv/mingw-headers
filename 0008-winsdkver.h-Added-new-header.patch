@@ -1,0 +1,40 @@
+From d46907ad2efaa8466a20497545d864bcf473ad18 Mon Sep 17 00:00:00 2001
+From: Jacek Caban <jacek@codeweavers.com>
+Date: Mon, 6 Oct 2014 11:23:33 +0200
+Subject: [PATCH 08/25] winsdkver.h: Added new header.
+
+---
+ mingw-w64-headers/include/winsdkver.h | 21 +++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
+ create mode 100644 mingw-w64-headers/include/winsdkver.h
+
+diff --git a/mingw-w64-headers/include/winsdkver.h b/mingw-w64-headers/include/winsdkver.h
+new file mode 100644
+index 0000000..45526e8
+--- /dev/null
++++ b/mingw-w64-headers/include/winsdkver.h
+@@ -0,0 +1,21 @@
++/**
++ * This file is part of the mingw-w64 runtime package.
++ * No warranty is given; refer to the file DISCLAIMER within this package.
++ */
++
++#ifndef _INC_WINSDKVER
++#define _INC_WINSDKVER
++
++#include <winapifamily.h>
++
++#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
++
++#define _WIN32_MAXVER         0x0602
++#define _WIN32_WINDOWS_MAXVER 0x0602
++#define NTDDI_MAXVER          0x0602
++#define _WIN32_IE_MAXVER      0x0b00
++#define _WIN32_WINNT_MAXVER   0x0602
++#define WINVER_MAXVER         0x0602
++
++#endif
++#endif
+-- 
+2.1.0
+

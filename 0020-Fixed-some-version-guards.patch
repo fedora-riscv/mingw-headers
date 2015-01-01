@@ -1,0 +1,78 @@
+From 64f7891f507795e17a7c843b1a936f3750c3de09 Mon Sep 17 00:00:00 2001
+From: Jacek Caban <cjacek@gmail.com>
+Date: Fri, 21 Feb 2014 11:46:07 +0000
+Subject: [PATCH 20/25] Fixed some version guards.
+
+git-svn-id: svn+ssh://svn.code.sf.net/p/mingw-w64/code/trunk@6491 4407c894-4637-0410-b4f5-ada5f102cad1
+---
+ mingw-w64-headers/include/eaptypes.h | 4 ++--
+ mingw-w64-headers/include/evntprov.h | 4 ++--
+ mingw-w64-headers/include/wlanapi.h  | 3 ---
+ 3 files changed, 4 insertions(+), 7 deletions(-)
+
+diff --git a/mingw-w64-headers/include/eaptypes.h b/mingw-w64-headers/include/eaptypes.h
+index a6d77a1..544543d 100644
+--- a/mingw-w64-headers/include/eaptypes.h
++++ b/mingw-w64-headers/include/eaptypes.h
+@@ -5,7 +5,7 @@
+  */
+ #ifndef _INC_EAPTYPES
+ #define _INC_EAPTYPES
+-#if (_WIN32_WINNT >= 0x0600)
++
+ #ifdef __cplusplus
+ extern "C" {
+ #endif
+@@ -306,5 +306,5 @@ typedef struct _EAP_CRED_EXPIRY_RESP {
+ #ifdef __cplusplus
+ }
+ #endif
+-#endif /*(_WIN32_WINNT >= 0x0600)*/
++
+ #endif /*_INC_EAPTYPES*/
+diff --git a/mingw-w64-headers/include/evntprov.h b/mingw-w64-headers/include/evntprov.h
+index 23274e0..2ea61e1 100644
+--- a/mingw-w64-headers/include/evntprov.h
++++ b/mingw-w64-headers/include/evntprov.h
+@@ -102,7 +102,7 @@ typedef VOID
+   PEVENT_FILTER_DESCRIPTOR FilterData,
+   PVOID CallbackContext);
+ 
+-#if (_WIN32_WINNT >= 0x0600)
++#if (WINVER >= 0x0600)
+ ULONG EVNTAPI EventRegister(
+   LPCGUID ProviderId,
+   PENABLECALLBACK EnableCallback,
+@@ -153,7 +153,7 @@ ULONG EVNTAPI EventActivityIdControl(
+   LPGUID ActivityId
+ );
+ 
+-#endif /*(_WIN32_WINNT >= 0x0600)*/
++#endif /*(WINVER >= 0x0600)*/
+ 
+ #if (_WIN32_WINNT >= 0x0601)
+ ULONG EVNTAPI EventWriteEx(
+diff --git a/mingw-w64-headers/include/wlanapi.h b/mingw-w64-headers/include/wlanapi.h
+index 598b991..fa0e506 100644
+--- a/mingw-w64-headers/include/wlanapi.h
++++ b/mingw-w64-headers/include/wlanapi.h
+@@ -386,7 +386,6 @@ DWORD WINAPI WlanSetProfilePosition(
+   PVOID pReserved
+ );
+ 
+-#if (_WIN32_WINNT >= 0x0600)
+ typedef char DOT11_COUNTRY_OR_REGION_STRING[3];
+ 
+ typedef enum _WLAN_AUTOCONF_OPCODE {
+@@ -738,8 +737,6 @@ DWORD WINAPI WlanUIEditProfile(
+   PWLAN_REASON_CODE *pWlanReasonCode
+ );
+ 
+-#endif /*(_WIN32_WINNT >= 0x0600)*/
+-
+ #ifdef __cplusplus
+ }
+ #endif
+-- 
+2.1.0
+

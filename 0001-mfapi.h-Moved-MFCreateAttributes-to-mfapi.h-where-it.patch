@@ -1,0 +1,40 @@
+From 51644cdbcfc6fa88e237337cb8db123419278be4 Mon Sep 17 00:00:00 2001
+From: Jacek Caban <cjacek@gmail.com>
+Date: Fri, 21 Feb 2014 11:45:45 +0000
+Subject: [PATCH 01/25] mfapi.h: Moved MFCreateAttributes to mfapi.h, where it
+ belongs.
+
+git-svn-id: svn+ssh://svn.code.sf.net/p/mingw-w64/code/trunk@6490 4407c894-4637-0410-b4f5-ada5f102cad1
+---
+ mingw-w64-headers/include/mfapi.h       | 2 ++
+ mingw-w64-headers/include/wmcontainer.h | 1 -
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/mingw-w64-headers/include/mfapi.h b/mingw-w64-headers/include/mfapi.h
+index 1fb8ec6..7c669b8 100644
+--- a/mingw-w64-headers/include/mfapi.h
++++ b/mingw-w64-headers/include/mfapi.h
+@@ -423,6 +423,8 @@ double WINAPI MFGetAttributeDouble(IMFAttributes *pAttributes,REFGUID guidKey,do
+ HRESULT WINAPI MFGetAttributesAsBlob(IMFAttributes *pAttributes,UINT8 *pBuf,UINT cbBufSize);
+ HRESULT WINAPI MFGetAttributesAsBlobSize(IMFAttributes *pAttributes,UINT32 *pcbBufSize);
+ UINT64 WINAPI MFGetAttributeUINT64(IMFAttributes *pAttributes,REFGUID guidKey,UINT64 unDefault);
++HRESULT WINAPI MFCreateAttributes(IMFAttributes**,UINT32);
++
+ HRESULT WINAPI MFGetPlaneSize(DWORD format,DWORD dwWidth,DWORD dwHeight,DWORD *pdwPlaneSize);
+ HRESULT WINAPI MFGetStrideForBitmapInfoHeader(DWORD format,DWORD dwWidth,LONG *pStride);
+ HRESULT WINAPI MFGetTimerPeriodicity(DWORD *Periodicity);
+diff --git a/mingw-w64-headers/include/wmcontainer.h b/mingw-w64-headers/include/wmcontainer.h
+index 82fa388..c50854c 100644
+--- a/mingw-w64-headers/include/wmcontainer.h
++++ b/mingw-w64-headers/include/wmcontainer.h
+@@ -622,7 +622,6 @@ extern "C" {
+ #endif
+ 
+ HRESULT WINAPI MFCreateASFSplitter(IMFASFSplitter **ppISplitter);
+-HRESULT WINAPI MFCreateAttributes(IMFAttributes **ppMFAttributes,UINT32 cInitialSize);
+ HRESULT WINAPI MFCreateWMAEncoderActivate(IMFMediaType *pMediaType,IPropertyStore *pEncodingConfigurationProperties,IMFActivate **ppActivate);
+ HRESULT WINAPI MFCreateWMVEncoderActivate(IMFMediaType *pMediaType,IPropertyStore *pEncodingConfigurationProperties,IMFActivate **ppActivate);
+ 
+-- 
+2.1.0
+

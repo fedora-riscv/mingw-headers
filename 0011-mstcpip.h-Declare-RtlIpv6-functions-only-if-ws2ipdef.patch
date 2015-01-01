@@ -1,0 +1,58 @@
+From e96bd4330beed5eeb06c6ea6e1bb25fc2b3ccbc0 Mon Sep 17 00:00:00 2001
+From: Jacek Caban <cjacek@gmail.com>
+Date: Fri, 7 Feb 2014 12:14:09 +0000
+Subject: [PATCH 11/25] mstcpip.h: Declare RtlIpv6* functions only if
+ ws2ipdef.h is included.
+
+git-svn-id: svn+ssh://svn.code.sf.net/p/mingw-w64/code/trunk@6475 4407c894-4637-0410-b4f5-ada5f102cad1
+---
+ mingw-w64-headers/include/mstcpip.h  | 4 ++++
+ mingw-w64-headers/include/ws2ipdef.h | 6 +++---
+ 2 files changed, 7 insertions(+), 3 deletions(-)
+
+diff --git a/mingw-w64-headers/include/mstcpip.h b/mingw-w64-headers/include/mstcpip.h
+index 9ae73af..200f1c2 100644
+--- a/mingw-w64-headers/include/mstcpip.h
++++ b/mingw-w64-headers/include/mstcpip.h
+@@ -99,6 +99,8 @@ typedef struct _SOCKET_SECURITY_SETTINGS_IPSEC {
+ #define RtlIpv6AddressToString __MINGW_NAME_AW(RtlIpv6AddressToString)
+ #define RtlIpv6AddressToStringEx __MINGW_NAME_AW(RtlIpv6AddressToStringEx)
+ 
++#ifdef _WS2IPDEF_
++
+ LPSTR NTAPI RtlIpv6AddressToStringA(const IN6_ADDR *Addr, LPSTR S);
+ LPWSTR NTAPI RtlIpv6AddressToStringW(const IN6_ADDR *Addr, LPWSTR S);
+ 
+@@ -125,6 +127,8 @@ LONG NTAPI RtlIpv4StringToAddressExW(PCWSTR AddressString, BOOLEAN Strict, IN_AD
+ LONG NTAPI RtlIpv6StringToAddressExA(PCSTR AddressString, IN6_ADDR *Address, PULONG ScopeId, PUSHORT Port);
+ LONG NTAPI RtlIpv6StringToAddressExW(PCWSTR AddressString, IN6_ADDR *Address, PULONG ScopeId, PUSHORT Port);
+ 
++#endif /* _WS2IPDEF_ */
++
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #endif /*(_WIN32_WINNT >= 0x0502)*/
+ 
+diff --git a/mingw-w64-headers/include/ws2ipdef.h b/mingw-w64-headers/include/ws2ipdef.h
+index bd810f7..4a4528c 100644
+--- a/mingw-w64-headers/include/ws2ipdef.h
++++ b/mingw-w64-headers/include/ws2ipdef.h
+@@ -2,8 +2,8 @@
+  * This file is part of the mingw-w64 runtime package.
+  * No warranty is given; refer to the file DISCLAIMER within this package.
+  */
+-#ifndef _INC_WS2IPDEF
+-#define _INC_WS2IPDEF
++#ifndef _WS2IPDEF_
++#define _WS2IPDEF_
+ 
+ #include <winapifamily.h>
+ 
+@@ -123,4 +123,4 @@ typedef struct group_source_req {
+ 
+ #endif /* WINAPI_PARTION_DESKTOP.  */
+ 
+-#endif /*_INC_WS2IPDEF*/
++#endif /*_WS2IPDEF_ */
+-- 
+2.1.0
+
