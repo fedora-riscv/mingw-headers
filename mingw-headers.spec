@@ -22,7 +22,7 @@
 
 Name:           mingw-headers
 Version:        4.0
-Release:        0.1.%{pre}%{?dist}
+Release:        0.2.%{pre}%{?dist}
 Summary:        Win32/Win64 header files
 
 License:        Public Domain and LGPLv2+ and ZPLv2.1
@@ -45,6 +45,9 @@ Source0:        http://downloads.sourceforge.net/mingw-w64/mingw-w64-v%{version}
 # headers to be regenerated from their .idl source. Prevent this from
 # happening as the .idl files shouldn't be used by default
 Patch0:         mingw-headers-no-widl.patch
+
+# Fix localtime_s and asctime_s compatibility issue
+Patch1:         0001-Use-a-Guard-defined-by-the-spec-and-not-_POSIX.-This.patch
 
 BuildArch:      noarch
 
@@ -92,6 +95,7 @@ unzip %{S:0}
 %endif
 
 %patch0 -p0 -b .idl
+%patch1 -p1 -b .posix_time
 
 
 %build
@@ -126,6 +130,9 @@ rm -f $RPM_BUILD_ROOT%{mingw64_includedir}/pthread_unistd.h
 
 
 %changelog
+* Wed Jan 28 2015 Erik van Pienbroek <epienbro@fedoraproject.org> - 4.0-0.2.rc1
+- Fix localtime_s and asctime_s compatibility issue
+
 * Mon Jan 26 2015 Erik van Pienbroek <epienbro@fedoraproject.org> - 4.0-0.1.rc1
 - Update to 4.0rc1
 

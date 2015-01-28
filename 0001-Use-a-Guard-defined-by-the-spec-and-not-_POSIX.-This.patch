@@ -1,0 +1,35 @@
+From c239923641ae52e6c99011c57bc35e86b38f6872 Mon Sep 17 00:00:00 2001
+From: martell <martellmalone@gmail.com>
+Date: Wed, 28 Jan 2015 20:54:58 +0000
+Subject: [PATCH] Use a Guard defined by the spec and not _POSIX. This should
+ also guard from windows programs that assume the functions are unavailable
+
+---
+ mingw-w64-headers/crt/time.h | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/mingw-w64-headers/crt/time.h b/mingw-w64-headers/crt/time.h
+index b551a27..7b43fd8 100644
+--- a/mingw-w64-headers/crt/time.h
++++ b/mingw-w64-headers/crt/time.h
+@@ -261,7 +261,7 @@ struct timezone {
+ 
+ #pragma pack(pop)
+ 
+-#if defined(_POSIX) || defined(_POSIX_THREAD_SAFE_FUNCTIONS)
++#if defined(_POSIX_C_SOURCE) || defined(_POSIX_THREAD_SAFE_FUNCTIONS)
+ __forceinline struct tm *__cdecl localtime_r(const time_t *_Time, struct tm *_Tm) {
+   return localtime_s(_Tm, _Time) ? NULL : _Tm;
+ }
+@@ -274,7 +274,7 @@ __forceinline char *__cdecl ctime_r(const time_t *_Time, char *_Str) {
+ __forceinline char *__cdecl asctime_r(const struct tm *_Tm, char * _Str) {
+   return asctime_s(_Str, 0x7fffffff, _Tm) ? NULL : _Str;
+ }
+-#endif /* _POSIX */
++#endif /* _POSIX_C_SOURCE */
+ 
+ /* Adding timespec definition.  */
+ #include <sys/timeb.h>
+-- 
+2.2.2
+
