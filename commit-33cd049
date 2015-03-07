@@ -1,0 +1,42 @@
+commit 33cd049d72ef5b5eae897e1e513e6b1b3b0432c6
+Author: Jacek Caban <jacek@codeweavers.com>
+Date:   Tue Nov 4 17:57:42 2014 +0100
+
+    opmapi.h fixes.
+
+diff --git a/mingw-w64-headers/include/opmapi.h b/mingw-w64-headers/include/opmapi.h
+index 085896f..4addf11 100644
+--- a/mingw-w64-headers/include/opmapi.h
++++ b/mingw-w64-headers/include/opmapi.h
+@@ -8,8 +8,6 @@
+ 
+ #include <dxva2api.h>
+ 
+-#if (_WIN32_WINNT >= 0x0600)
+-
+ #define OPM_OMAC_SIZE                                16
+ #define OPM_CONFIGURE_SETTING_DATA_SIZE              4056
+ #define OPM_REQUESTED_INFORMATION_SIZE               4076
+@@ -225,11 +223,11 @@ DECLARE_INTERFACE_(IOPMVideoOutput,IUnknown)
+     STDMETHOD_(ULONG, Release)(THIS) PURE;
+ 
+     /* IOPMVideoOutput methods */
+-    STDMETHOD_(HRESULT,Configure)(THIS_ const OPM_CONFIGURE_PARAMETERS *pParameters,ULONG ulAdditionalParametersSize,const BYTE *pbAdditionalParameters) PURE;
+-    STDMETHOD_(HRESULT,COPPCompatibleGetInformation)(THIS_ const OPM_COPP_COMPATIBLE_GET_INFO_PARAMETERS *pParameters,OPM_REQUESTED_INFORMATION *pRequestedInformation) PURE;
++    STDMETHOD_(HRESULT,StartInitialization)(THIS_ OPM_RANDOM_NUMBER *prnRandomNumber,BYTE **ppbCertificate,ULONG *pulCertificateLength) PURE;
+     STDMETHOD_(HRESULT,FinishInitialization)(THIS_ const OPM_ENCRYPTED_INITIALIZATION_PARAMETERS *pParameters) PURE;
+     STDMETHOD_(HRESULT,GetInformation)(THIS_ const OPM_GET_INFO_PARAMETERS *pParameters,OPM_REQUESTED_INFORMATION *pRequestedInformation) PURE;
+-    STDMETHOD_(HRESULT,StartInitialization)(THIS_ OPM_RANDOM_NUMBER *prnRandomNumber,BYTE **ppbCertificate,ULONG *pulCertificateLength) PURE;
++    STDMETHOD_(HRESULT,COPPCompatibleGetInformation)(THIS_ const OPM_COPP_COMPATIBLE_GET_INFO_PARAMETERS *pParameters,OPM_REQUESTED_INFORMATION *pRequestedInformation) PURE;
++    STDMETHOD_(HRESULT,Configure)(THIS_ const OPM_CONFIGURE_PARAMETERS *pParameters,ULONG ulAdditionalParametersSize,const BYTE *pbAdditionalParameters) PURE;
+ 
+     END_INTERFACE
+ };
+@@ -263,7 +263,5 @@
+ }
+ #endif
+ 
+-#endif /*(_WIN32_WINNT >= 0x0600)*/
+-
+ #endif /*_INC_OPMAPI*/
+ 

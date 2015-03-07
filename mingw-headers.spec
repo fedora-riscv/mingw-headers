@@ -19,7 +19,7 @@
 
 Name:           mingw-headers
 Version:        3.3.0
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Win32/Win64 header files
 
 License:        Public Domain and LGPLv2+ and ZPLv2.1
@@ -69,6 +69,11 @@ Patch22:        0022-dwrite.h-Don-t-duplicate-parent-interface-methods-fo.patch
 Patch23:        0023-string_s.h-wchar_s.h-Added-wcsnlen_s-implementation.patch
 Patch24:        0024-Use-__forceinline-for-wcsnlen_s-implementation.patch
 Patch25:        0025-Implement-IDXGIDevice1.patch
+Patch26:        commit-5db5317
+Patch27:        commit-6a4cb01
+Patch28:        commit-a0c08bc
+Patch29:        commit-33cd049
+Patch30:        commit-eba7897
 
 
 %description
@@ -135,6 +140,11 @@ unzip %{S:0}
 %patch23 -p1
 %patch24 -p1
 %patch25 -p1
+%patch26 -p1
+%patch27 -p1
+%patch28 -p1
+%patch29 -p1
+%patch30 -p1
 
 
 %build
@@ -169,6 +179,9 @@ rm -f $RPM_BUILD_ROOT%{mingw64_includedir}/pthread_unistd.h
 
 
 %changelog
+* Sat Mar  7 2015 Erik van Pienbroek <epienbro@fedoraproject.org> - 3.3.0-3
+- Backported more upstream commits which are needed by latest mingw-wine-gecko
+
 * Wed Dec 31 2014 Erik van Pienbroek <epienbro@fedoraproject.org> - 3.3.0-2
 - Backport various upstream commits which are required to build
   the most recent mingw-wine-gecko and mingw-angleproject

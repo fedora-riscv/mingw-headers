@@ -1,0 +1,71 @@
+commit 6a4cb01b989abb1516dce1031f18841318115a1e
+Author: Jacek Caban <jacek@codeweavers.com>
+Date:   Thu Nov 13 14:47:06 2014 +0100
+
+    Updated imported headers to current Wine version.
+
+diff --git a/mingw-w64-headers/direct-x/include/d3d9.h b/mingw-w64-headers/direct-x/include/d3d9.h
+index afdd47b..1557fa2 100644
+--- a/mingw-w64-headers/direct-x/include/d3d9.h
++++ b/mingw-w64-headers/direct-x/include/d3d9.h
+@@ -63,6 +63,8 @@
+ #define D3D_SDK_VERSION                         32
+ #define D3DADAPTER_DEFAULT                      0
+ #define D3DENUM_NO_WHQL_LEVEL                   __MSABI_LONG(0x00000002)
++#define D3DPRESENT_DONOTWAIT                    __MSABI_LONG(1)
++#define D3DPRESENT_LINEAR_CONTENT               __MSABI_LONG(2)
+ #define D3DPRESENT_BACK_BUFFERS_MAX             __MSABI_LONG(3)
+ #define D3DSGR_NO_CALIBRATION                   __MSABI_LONG(0x00000000)
+ #define D3DSGR_CALIBRATE                        __MSABI_LONG(0x00000001)
+diff --git a/mingw-w64-headers/direct-x/include/d3dx9shape.h b/mingw-w64-headers/direct-x/include/d3dx9shape.h
+index ec19750..1dcd40a 100644
+--- a/mingw-w64-headers/direct-x/include/d3dx9shape.h
++++ b/mingw-w64-headers/direct-x/include/d3dx9shape.h
+@@ -30,6 +30,8 @@ HRESULT WINAPI D3DXCreateBox(struct IDirect3DDevice9 *device, float width, float
+         float depth, struct ID3DXMesh **mesh, struct ID3DXBuffer **adjacency);
+ HRESULT WINAPI D3DXCreateCylinder(struct IDirect3DDevice9 *device, float radius1, float radius2,
+         float length, UINT slices, UINT stacks, struct ID3DXMesh **mesh, struct ID3DXBuffer **adjacency);
++HRESULT WINAPI D3DXCreatePolygon(struct IDirect3DDevice9 *device, float length, UINT sides, struct ID3DXMesh **mesh,
++        ID3DXBuffer **adjacency);
+ HRESULT WINAPI D3DXCreateSphere(struct IDirect3DDevice9 *device, float radius, UINT slices,
+         UINT stacks, struct ID3DXMesh **mesh, struct ID3DXBuffer **adjacency);
+ HRESULT WINAPI D3DXCreateTeapot(struct IDirect3DDevice9 *device,
+diff --git a/mingw-w64-headers/include/wpcapi.h b/mingw-w64-headers/include/wpcapi.h
+index 4d37183..c3e55d1 100644
+--- a/mingw-w64-headers/include/wpcapi.h
++++ b/mingw-w64-headers/include/wpcapi.h
+@@ -51,6 +51,14 @@ typedef interface IWindowsParentalControls IWindowsParentalControls;
+ extern "C" {
+ #endif
+ 
++typedef enum tagWPCFLAG_RESTRICTION {
++    WPCFLAG_NO_RESTRICTION = 0x0,
++    WPCFLAG_LOGGING_REQUIRED = 0x1,
++    WPCFLAG_WEB_FILTERED = 0x2,
++    WPCFLAG_HOURS_RESTRICTED = 0x4,
++    WPCFLAG_GAMES_BLOCKED = 0x8,
++    WPCFLAG_APPS_RESTRICTED = 0x10
++} WPCFLAG_RESTRICTION;
+ /*****************************************************************************
+  * IWPCSettings interface
+  */
+diff --git a/mingw-w64-headers/include/wpcapi.idl b/mingw-w64-headers/include/wpcapi.idl
+index 19c5256..db2d991 100644
+--- a/mingw-w64-headers/include/wpcapi.idl
++++ b/mingw-w64-headers/include/wpcapi.idl
+@@ -19,6 +19,15 @@
+ import "oaidl.idl";
+ import "ocidl.idl";
+ 
++typedef [v1_enum] enum tagWPCFLAG_RESTRICTION {
++    WPCFLAG_NO_RESTRICTION    = 0x0000,
++    WPCFLAG_LOGGING_REQUIRED  = 0x0001,
++    WPCFLAG_WEB_FILTERED      = 0x0002,
++    WPCFLAG_HOURS_RESTRICTED  = 0x0004,
++    WPCFLAG_GAMES_BLOCKED     = 0x0008,
++    WPCFLAG_APPS_RESTRICTED   = 0x0010
++} WPCFLAG_RESTRICTION;
++
+ [
+     uuid(8fdf6ca1-0189-47e4-b670-1a8a4636e340),
+     object

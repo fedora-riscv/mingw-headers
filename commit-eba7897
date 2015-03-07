@@ -1,0 +1,23 @@
+commit eba78977c58f54f2ee0c65ab7dfdf64a53b715cd
+Author: Jacek Caban <jacek@codeweavers.com>
+Date:   Fri Oct 31 15:01:27 2014 +0100
+
+    winnt.h: Added UNW_* flags for amd64.
+
+diff --git a/mingw-w64-headers/include/winnt.h b/mingw-w64-headers/include/winnt.h
+index a20c884..b703125 100644
+--- a/mingw-w64-headers/include/winnt.h
++++ b/mingw-w64-headers/include/winnt.h
+@@ -1746,6 +1746,12 @@ extern "C" {
+   typedef DWORD (*POUT_OF_PROCESS_FUNCTION_TABLE_CALLBACK)(HANDLE Process,PVOID TableAddress,PDWORD Entries,PRUNTIME_FUNCTION *Functions);
+ 
+ #define OUT_OF_PROCESS_FUNCTION_TABLE_CALLBACK_EXPORT_NAME "OutOfProcessFunctionTableCallback"
++
++#define UNW_FLAG_NHANDLER   0x00
++#define UNW_FLAG_EHANDLER   0x01
++#define UNW_FLAG_UHANDLER   0x02
++#define UNW_FLAG_CHAININFO  0x04
++
+ #endif /* end of _AMD64_ */
+ 
+ 
