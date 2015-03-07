@@ -3,7 +3,7 @@
 #%%global snapshot_rev_short %(echo %snapshot_rev | cut -c1-6)
 #%%global branch trunk
 
-%global pre rc1
+%global pre rc3
 
 # The mingw-w64-headers provide the headers pthread_time.h
 # and pthread_unistd.h by default and are dummy headers.
@@ -22,7 +22,7 @@
 
 Name:           mingw-headers
 Version:        4.0
-Release:        0.2.%{pre}%{?dist}
+Release:        0.3.%{pre}%{?dist}
 Summary:        Win32/Win64 header files
 
 License:        Public Domain and LGPLv2+ and ZPLv2.1
@@ -45,9 +45,6 @@ Source0:        http://downloads.sourceforge.net/mingw-w64/mingw-w64-v%{version}
 # headers to be regenerated from their .idl source. Prevent this from
 # happening as the .idl files shouldn't be used by default
 Patch0:         mingw-headers-no-widl.patch
-
-# Fix localtime_s and asctime_s compatibility issue
-Patch1:         0001-Use-a-Guard-defined-by-the-spec-and-not-_POSIX.-This.patch
 
 BuildArch:      noarch
 
@@ -95,7 +92,6 @@ unzip %{S:0}
 %endif
 
 %patch0 -p0 -b .idl
-%patch1 -p1 -b .posix_time
 
 
 %build
@@ -130,6 +126,9 @@ rm -f $RPM_BUILD_ROOT%{mingw64_includedir}/pthread_unistd.h
 
 
 %changelog
+* Sat Mar  7 2015 Erik van Pienbroek <epienbro@fedoraproject.org> - 4.0-0.3.rc3
+- Update to 4.0rc3
+
 * Wed Jan 28 2015 Erik van Pienbroek <epienbro@fedoraproject.org> - 4.0-0.2.rc1
 - Fix localtime_s and asctime_s compatibility issue
 
