@@ -3,7 +3,7 @@
 #%%global snapshot_rev_short %(echo %snapshot_rev | cut -c1-6)
 #%%global branch trunk
 
-%global pre rc3
+#%%global pre rc3
 
 # The mingw-w64-headers provide the headers pthread_time.h
 # and pthread_unistd.h by default and are dummy headers.
@@ -21,8 +21,8 @@
 %endif
 
 Name:           mingw-headers
-Version:        4.0
-Release:        0.3.%{pre}%{?dist}
+Version:        4.0.0
+Release:        1%{?dist}
 Summary:        Win32/Win64 header files
 
 License:        Public Domain and LGPLv2+ and ZPLv2.1
@@ -126,6 +126,9 @@ rm -f $RPM_BUILD_ROOT%{mingw64_includedir}/pthread_unistd.h
 
 
 %changelog
+* Sat Mar 21 2015 Erik van Pienbroek <epienbro@fedoraproject.org> - 4.0.0-1
+- Update to 4.0.0
+
 * Sat Mar  7 2015 Erik van Pienbroek <epienbro@fedoraproject.org> - 4.0-0.3.rc3
 - Update to 4.0rc3
 
