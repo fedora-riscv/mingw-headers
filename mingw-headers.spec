@@ -21,7 +21,7 @@
 %endif
 
 Name:           mingw-headers
-Version:        4.0.0
+Version:        4.0.1
 Release:        1%{?dist}
 Summary:        Win32/Win64 header files
 
@@ -126,6 +126,9 @@ rm -f $RPM_BUILD_ROOT%{mingw64_includedir}/pthread_unistd.h
 
 
 %changelog
+* Sun Mar 29 2015 Erik van Pienbroek <epienbro@fedoraproject.org> - 4.0.1-1
+- Update to 4.0.1
+
 * Sat Mar 21 2015 Erik van Pienbroek <epienbro@fedoraproject.org> - 4.0.0-1
 - Update to 4.0.0
 
