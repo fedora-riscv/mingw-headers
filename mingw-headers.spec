@@ -21,7 +21,7 @@
 %endif
 
 Name:           mingw-headers
-Version:        4.0.1
+Version:        4.0.2
 Release:        1%{?dist}
 Summary:        Win32/Win64 header files
 
@@ -45,6 +45,9 @@ Source0:        http://downloads.sourceforge.net/mingw-w64/mingw-w64-v%{version}
 # headers to be regenerated from their .idl source. Prevent this from
 # happening as the .idl files shouldn't be used by default
 Patch0:         mingw-headers-no-widl.patch
+
+# Backport fix for https://bugzilla.redhat.com/show_bug.cgi?id=1213843
+Patch1:         commit-6c56d0b
 
 BuildArch:      noarch
 
@@ -92,6 +95,7 @@ unzip %{S:0}
 %endif
 
 %patch0 -p0 -b .idl
+%patch1 -p1
 
 
 %build
@@ -126,6 +130,10 @@ rm -f $RPM_BUILD_ROOT%{mingw64_includedir}/pthread_unistd.h
 
 
 %changelog
+* Fri Apr 24 2015 Erik van Pienbroek <epienbro@fedoraproject.org> - 4.0.2-1
+- Update to 4.0.2
+- Backport fix for shlobj.h regression (RHBZ #1213843)
+
 * Sun Mar 29 2015 Erik van Pienbroek <epienbro@fedoraproject.org> - 4.0.1-1
 - Update to 4.0.1
 
