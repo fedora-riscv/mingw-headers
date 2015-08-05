@@ -1,0 +1,56 @@
+From 4ce7a79ee9b1099f9762ee7a4d9f7ad1bbc01bc9 Mon Sep 17 00:00:00 2001
+From: Jacek Caban <jacek@codeweavers.com>
+Date: Fri, 22 May 2015 16:25:01 +0200
+Subject: Install *.c files as headers as well.
+
+
+diff --git a/mingw-w64-headers/Makefile.am b/mingw-w64-headers/Makefile.am
+index a8f0990..2e66933 100644
+--- a/mingw-w64-headers/Makefile.am
++++ b/mingw-w64-headers/Makefile.am
+@@ -36,6 +36,7 @@ dist-hook:
+ 	find $(distdir) -name ".svn" -type d -delete
+ 
+ EXTRA_HEADERS = \
++  include/*.c \
+   include/*.dlg \
+   include/*.h \
+   include/*.h16 \
+diff --git a/mingw-w64-headers/Makefile.in b/mingw-w64-headers/Makefile.in
+index 901ff18..f0b4066 100644
+--- a/mingw-w64-headers/Makefile.in
++++ b/mingw-w64-headers/Makefile.in
+@@ -262,6 +262,7 @@ CLEANFILES = $(nodist_sdkshead_HEADERS)
+ DISTCHECK_CONFIGURE_FLAGS = --enable-crt --enable-sdk=all --enable-idl
+ EXTRA_DIST = $(srcdir)/ChangeLog.* include crt direct-x ddk
+ EXTRA_HEADERS = \
++  include/*.c \
+   include/*.dlg \
+   include/*.h \
+   include/*.h16 \
+diff --git a/mingw-w64-headers/configure b/mingw-w64-headers/configure
+index 8de18ee..abc4d42 100755
+--- a/mingw-w64-headers/configure
++++ b/mingw-w64-headers/configure
+@@ -2547,7 +2547,7 @@ fi
+ 
+ BASEHEAD_LIST="crt/_bsd_types.h crt/_cygwin.h crt/_mingw.h crt/_mingw_mac.h crt/_mingw_print_push.h crt/_mingw_print_pop.h crt/_mingw_secapi.h crt/_mingw_unicode.h crt/_timeval.h crt/crtdefs.h crt/excpt.h crt/intrin.h crt/vadefs.h crt/tchar.h "$srcdir/include/*.h
+ SECHEAD_LIST="$srcdir/crt/sec_api/stralign_s.h"
+-for i in dlg h16 hxx rh ver; do
++for i in c dlg h16 hxx rh ver; do
+   BASEHEAD_LIST="$BASEHEAD_LIST "$srcdir/include/*.$i
+ done
+ #FIXME: Add in base directx
+diff --git a/mingw-w64-headers/configure.ac b/mingw-w64-headers/configure.ac
+index 312cf0a..7e3863d 100644
+--- a/mingw-w64-headers/configure.ac
++++ b/mingw-w64-headers/configure.ac
+@@ -41,7 +41,7 @@
+ 
+ BASEHEAD_LIST="crt/_bsd_types.h crt/_cygwin.h crt/_mingw.h crt/_mingw_mac.h crt/_mingw_print_push.h crt/_mingw_print_pop.h crt/_mingw_secapi.h crt/_mingw_unicode.h crt/_timeval.h crt/crtdefs.h crt/excpt.h crt/intrin.h crt/vadefs.h crt/tchar.h "$srcdir/include/*.h
+ SECHEAD_LIST="$srcdir/crt/sec_api/stralign_s.h"
+-for i in dlg h16 hxx rh ver; do
++for i in c dlg h16 hxx rh ver; do
+   BASEHEAD_LIST="$BASEHEAD_LIST "$srcdir/include/*.$i
+ done
+ #FIXME: Add in base directx

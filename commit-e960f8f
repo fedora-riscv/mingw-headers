@@ -1,0 +1,34 @@
+From e960f8fffb399036079cef960a44e86a9abebc71 Mon Sep 17 00:00:00 2001
+From: Jacek Caban <jacek@codeweavers.com>
+Date: Thu, 19 Mar 2015 14:47:13 +0100
+Subject: winsdkver.h: Added *_WINBLUE defines.
+
+
+diff --git a/mingw-w64-headers/include/sdkddkver.h b/mingw-w64-headers/include/sdkddkver.h
+index 0433811..1b965ae 100644
+--- a/mingw-w64-headers/include/sdkddkver.h
++++ b/mingw-w64-headers/include/sdkddkver.h
+@@ -21,6 +21,7 @@
+ #define _WIN32_WINNT_LONGHORN		0x0600
+ #define _WIN32_WINNT_WIN7		0x0601
+ #define _WIN32_WINNT_WIN8		0x0602
++#define _WIN32_WINNT_WINBLUE            0x0603
+ 
+ /* _WIN32_IE */
+ #define _WIN32_IE_IE20			0x0200
+@@ -64,6 +65,7 @@
+ #define _WIN32_IE_LONGHORN		_WIN32_IE_IE70
+ #define _WIN32_IE_WIN7			_WIN32_IE_IE80
+ #define _WIN32_IE_WIN8                  _WIN32_IE_IE100
++#define _WIN32_IE_WINBLUE               _WIN32_IE_IE100
+ 
+ /* NTDDI_VERSION */
+ #ifndef NTDDI_WIN2K
+@@ -124,6 +126,7 @@
+ 
+ #define NTDDI_WIN7			0x06010000
+ #define NTDDI_WIN8                      0x06020000
++#define NTDDI_WINBLUE                   0x06030000
+ 
+ /* Version Fields in NTDDI_VERSION */
+ #define OSVERSION_MASK			0xFFFF0000U

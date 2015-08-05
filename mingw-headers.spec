@@ -21,8 +21,8 @@
 %endif
 
 Name:           mingw-headers
-Version:        4.0.2
-Release:        2%{?dist}
+Version:        4.0.4
+Release:        1%{?dist}
 Summary:        Win32/Win64 header files
 
 License:        Public Domain and LGPLv2+ and ZPLv2.1
@@ -46,8 +46,15 @@ Source0:        http://downloads.sourceforge.net/mingw-w64/mingw-w64-v%{version}
 # happening as the .idl files shouldn't be used by default
 Patch0:         mingw-headers-no-widl.patch
 
-# Backport fix for https://bugzilla.redhat.com/show_bug.cgi?id=1213843
-Patch1:         commit-6c56d0b
+# Backported commits required to build wine-gecko 2.40-beta1
+Patch1:         commit-4ce7a79
+Patch2:         commit-7eee339
+Patch3:         commit-85b4034
+Patch4:         commit-a883b47
+Patch5:         commit-e4a8812
+Patch6:         commit-e960f8f
+Patch7:         commit-ef5e914
+Patch8:         commit-fc960d3
 
 BuildArch:      noarch
 
@@ -95,7 +102,16 @@ unzip %{S:0}
 %endif
 
 %patch0 -p0 -b .idl
+
+# wine-gecko backports
 %patch1 -p1
+%patch2 -p1
+%patch3 -p1
+%patch4 -p1
+%patch5 -p1
+%patch6 -p1
+%patch7 -p1
+%patch8 -p1
 
 
 %build
@@ -130,6 +146,10 @@ rm -f $RPM_BUILD_ROOT%{mingw64_includedir}/pthread_unistd.h
 
 
 %changelog
+* Wed Aug  5 2015 Erik van Pienbroek <epienbro@fedoraproject.org> - 4.0.4-1
+- Update to 4.0.4
+- Backport various commits which are required by wine-gecko 2.40-beta1
+
 * Wed Jun 17 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 4.0.2-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
 
