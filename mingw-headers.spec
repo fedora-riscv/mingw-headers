@@ -22,7 +22,7 @@
 
 Name:           mingw-headers
 Version:        4.0.4
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Win32/Win64 header files
 
 License:        Public Domain and LGPLv2+ and ZPLv2.1
@@ -55,6 +55,9 @@ Patch5:         commit-e4a8812
 Patch6:         commit-e960f8f
 Patch7:         commit-ef5e914
 Patch8:         commit-fc960d3
+
+# Backported commit required to build mingw-qt5-qtactiveqt 5.5.0
+Patch9:         commit-5f5e2c1
 
 BuildArch:      noarch
 
@@ -113,6 +116,9 @@ unzip %{S:0}
 %patch7 -p1
 %patch8 -p1
 
+# mingw-qt5-qtactiveqt backports
+%patch9 -p1
+
 
 %build
 pushd mingw-w64-headers
@@ -146,6 +152,10 @@ rm -f $RPM_BUILD_ROOT%{mingw64_includedir}/pthread_unistd.h
 
 
 %changelog
+* Fri Aug  7 2015 Erik van Pienbroek <epienbro@fedoraproject.org> - 4.0.4-2
+- Backport commit 5f5e2c (duplicate defines in activscp.h)
+  as it is required by mingw-qt5-qtactiveqt 5.5.0
+
 * Wed Aug  5 2015 Erik van Pienbroek <epienbro@fedoraproject.org> - 4.0.4-1
 - Update to 4.0.4
 - Backport various commits which are required by wine-gecko 2.40-beta1
