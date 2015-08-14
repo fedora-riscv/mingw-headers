@@ -1,0 +1,19 @@
+From e5ebc15356113a0fa2b8869a73086f6790ab3657 Mon Sep 17 00:00:00 2001
+From: Jacek Caban <jacek@codeweavers.com>
+Date: Sat, 25 Jul 2015 19:03:03 +0200
+Subject: roapi.h: Fixed a typo.
+
+
+diff --git a/mingw-w64-headers/include/roapi.h b/mingw-w64-headers/include/roapi.h
+index 9cd0f29..14d94c3 100644
+--- a/mingw-w64-headers/include/roapi.h
++++ b/mingw-w64-headers/include/roapi.h
+@@ -56,7 +56,7 @@ HRESULT WINAPI RoGetApartmentIdentifier (UINT64 *apartmentId);
+ 
+ namespace Windows {
+   namespace Foundation {
+-    __inline HRESULT Initalize (RO_INIT_TYPE it
++    __inline HRESULT Initialize (RO_INIT_TYPE it
+ #if WINAPI_FAMILY_PARTITION (WINAPI_PARTITION_DESKTOP)
+ 	 = RO_INIT_SINGLETHREADED
+ #endif

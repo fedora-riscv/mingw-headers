@@ -22,7 +22,7 @@
 
 Name:           mingw-headers
 Version:        4.0.4
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Win32/Win64 header files
 
 License:        Public Domain and LGPLv2+ and ZPLv2.1
@@ -46,7 +46,7 @@ Source0:        http://downloads.sourceforge.net/mingw-w64/mingw-w64-v%{version}
 # happening as the .idl files shouldn't be used by default
 Patch0:         mingw-headers-no-widl.patch
 
-# Backported commits required to build wine-gecko 2.40-beta1
+# Backported commits required to build wine-gecko 2.40
 Patch1:         commit-4ce7a79
 Patch2:         commit-7eee339
 Patch3:         commit-85b4034
@@ -55,9 +55,15 @@ Patch5:         commit-e4a8812
 Patch6:         commit-e960f8f
 Patch7:         commit-ef5e914
 Patch8:         commit-fc960d3
+Patch9:         commit-58b571e
+Patch10:        commit-eac9192
+Patch11:        commit-b3d0437
+Patch12:        commit-e5ebc15
+Patch13:        commit-21c9cbf
+Patch14:        commit-6249fb9
 
 # Backported commit required to build mingw-qt5-qtactiveqt 5.5.0
-Patch9:         commit-5f5e2c1
+Patch99:        commit-5f5e2c1
 
 BuildArch:      noarch
 
@@ -115,9 +121,15 @@ unzip %{S:0}
 %patch6 -p1
 %patch7 -p1
 %patch8 -p1
+%patch9 -p1
+%patch10 -p1
+%patch11 -p1
+%patch12 -p1
+%patch13 -p1
+%patch14 -p1
 
 # mingw-qt5-qtactiveqt backports
-%patch9 -p1
+%patch99 -p1
 
 
 %build
@@ -152,6 +164,9 @@ rm -f $RPM_BUILD_ROOT%{mingw64_includedir}/pthread_unistd.h
 
 
 %changelog
+* Fri Aug 14 2015 Erik van Pienbroek <epienbro@fedoraproject.org> - 4.0.4-3
+- Backport more commits which are required to build wine-gecko 2.40
+
 * Fri Aug  7 2015 Erik van Pienbroek <epienbro@fedoraproject.org> - 4.0.4-2
 - Backport commit 5f5e2c (duplicate defines in activscp.h)
   as it is required by mingw-qt5-qtactiveqt 5.5.0
