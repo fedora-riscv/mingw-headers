@@ -1,7 +1,7 @@
-#%%global snapshot_date 20141222
-#%%global snapshot_rev f7337bdf0d70809e720b4e2671758e0c10c16f60
-#%%global snapshot_rev_short %(echo %snapshot_rev | cut -c1-6)
-#%%global branch trunk
+%global snapshot_date 20151224
+%global snapshot_rev 5e2e73b7754fca77ef7635cf52c73a3885110603
+%global snapshot_rev_short %(echo %snapshot_rev | cut -c1-6)
+%global branch trunk
 
 #%%global pre rc3
 
@@ -21,8 +21,8 @@
 %endif
 
 Name:           mingw-headers
-Version:        4.0.4
-Release:        3%{?dist}
+Version:        4.9.999
+Release:        0.1.%{branch}.git%{snapshot_rev_short}.%{snapshot_date}%{?dist}
 Summary:        Win32/Win64 header files
 
 License:        Public Domain and LGPLv2+ and ZPLv2.1
@@ -45,25 +45,6 @@ Source0:        http://downloads.sourceforge.net/mingw-w64/mingw-w64-v%{version}
 # headers to be regenerated from their .idl source. Prevent this from
 # happening as the .idl files shouldn't be used by default
 Patch0:         mingw-headers-no-widl.patch
-
-# Backported commits required to build wine-gecko 2.40
-Patch1:         commit-4ce7a79
-Patch2:         commit-7eee339
-Patch3:         commit-85b4034
-Patch4:         commit-a883b47
-Patch5:         commit-e4a8812
-Patch6:         commit-e960f8f
-Patch7:         commit-ef5e914
-Patch8:         commit-fc960d3
-Patch9:         commit-58b571e
-Patch10:        commit-eac9192
-Patch11:        commit-b3d0437
-Patch12:        commit-e5ebc15
-Patch13:        commit-21c9cbf
-Patch14:        commit-6249fb9
-
-# Backported commit required to build mingw-qt5-qtactiveqt 5.5.0
-Patch99:        commit-5f5e2c1
 
 BuildArch:      noarch
 
@@ -112,25 +93,6 @@ unzip %{S:0}
 
 %patch0 -p0 -b .idl
 
-# wine-gecko backports
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
-%patch5 -p1
-%patch6 -p1
-%patch7 -p1
-%patch8 -p1
-%patch9 -p1
-%patch10 -p1
-%patch11 -p1
-%patch12 -p1
-%patch13 -p1
-%patch14 -p1
-
-# mingw-qt5-qtactiveqt backports
-%patch99 -p1
-
 
 %build
 pushd mingw-w64-headers
@@ -164,6 +126,9 @@ rm -f $RPM_BUILD_ROOT%{mingw64_includedir}/pthread_unistd.h
 
 
 %changelog
+* Thu Dec 24 2015 Erik van Pienbroek <epienbro@fedoraproject.org> - 4.9.999-0.1.trunk.git.5e2e73.20151224
+- Update to 20151224 snapshot (git rev 5e2e73)
+
 * Fri Aug 14 2015 Erik van Pienbroek <epienbro@fedoraproject.org> - 4.0.4-3
 - Backport more commits which are required to build wine-gecko 2.40
 
