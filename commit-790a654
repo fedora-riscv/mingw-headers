@@ -1,0 +1,703 @@
+From 790a6544347b53c314b9c6f1ea757a2d5504c67e Mon Sep 17 00:00:00 2001
+From: Jacek Caban <jacek@codeweavers.com>
+Date: Thu, 26 Mar 2015 17:56:50 +0100
+Subject: Updated imported headers to current Wine version.
+
+
+diff --git a/mingw-w64-headers/direct-x/include/d3d11.h b/mingw-w64-headers/direct-x/include/d3d11.h
+index 34c846b..cc64c3f 100644
+--- a/mingw-w64-headers/direct-x/include/d3d11.h
++++ b/mingw-w64-headers/direct-x/include/d3d11.h
+@@ -597,8 +597,29 @@ typedef enum D3D11_FEATURE {
+     D3D11_FEATURE_DOUBLES = 1,
+     D3D11_FEATURE_FORMAT_SUPPORT = 2,
+     D3D11_FEATURE_FORMAT_SUPPORT2 = 3,
+-    D3D11_FEATURE_D3D10_X_HARDWARE_OPTIONS = 4
++    D3D11_FEATURE_D3D10_X_HARDWARE_OPTIONS = 4,
++    D3D11_FEATURE_D3D11_OPTIONS = 5,
++    D3D11_FEATURE_ARCHITECTURE_INFO = 6,
++    D3D11_FEATURE_D3D9_OPTIONS = 7,
++    D3D11_FEATURE_SHADER_MIN_PRECISION_SUPPORT = 8,
++    D3D11_FEATURE_D3D9_SHADOW_SUPPORT = 9
+ } D3D11_FEATURE;
++typedef struct D3D11_FEATURE_DATA_D3D11_OPTIONS {
++    WINBOOL OutputMergerLogicOp;
++    WINBOOL UAVOnlyRenderingForcedSampleCount;
++    WINBOOL DiscardAPIsSeenByDriver;
++    WINBOOL FlagsForUpdateAndCopySeenByDriver;
++    WINBOOL ClearView;
++    WINBOOL CopyWithOverlap;
++    WINBOOL ConstantBufferPartialUpdate;
++    WINBOOL ConstantBufferOffsetting;
++    WINBOOL MapNoOverwriteOnDynamicConstantBuffer;
++    WINBOOL MapNoOverwriteOnDynamicBufferSRV;
++    WINBOOL MultisampleRTVWithForcedSampleCountOne;
++    WINBOOL SAD4ShaderInstructions;
++    WINBOOL ExtendedDoublesShaderInstructions;
++    WINBOOL ExtendedResourceSharing;
++} D3D11_FEATURE_DATA_D3D11_OPTIONS;
+ typedef enum D3D11_FILL_MODE {
+     D3D11_FILL_WIREFRAME = 2,
+     D3D11_FILL_SOLID = 3
+diff --git a/mingw-w64-headers/direct-x/include/d3d11.idl b/mingw-w64-headers/direct-x/include/d3d11.idl
+index d5732c9..c187463 100644
+--- a/mingw-w64-headers/direct-x/include/d3d11.idl
++++ b/mingw-w64-headers/direct-x/include/d3d11.idl
+@@ -362,8 +362,31 @@ typedef enum D3D11_FEATURE
+     D3D11_FEATURE_FORMAT_SUPPORT,
+     D3D11_FEATURE_FORMAT_SUPPORT2,
+     D3D11_FEATURE_D3D10_X_HARDWARE_OPTIONS,
++    D3D11_FEATURE_D3D11_OPTIONS,
++    D3D11_FEATURE_ARCHITECTURE_INFO,
++    D3D11_FEATURE_D3D9_OPTIONS,
++    D3D11_FEATURE_SHADER_MIN_PRECISION_SUPPORT,
++    D3D11_FEATURE_D3D9_SHADOW_SUPPORT
+ } D3D11_FEATURE;
+ 
++typedef struct D3D11_FEATURE_DATA_D3D11_OPTIONS
++{
++    BOOL OutputMergerLogicOp;
++    BOOL UAVOnlyRenderingForcedSampleCount;
++    BOOL DiscardAPIsSeenByDriver;
++    BOOL FlagsForUpdateAndCopySeenByDriver;
++    BOOL ClearView;
++    BOOL CopyWithOverlap;
++    BOOL ConstantBufferPartialUpdate;
++    BOOL ConstantBufferOffsetting;
++    BOOL MapNoOverwriteOnDynamicConstantBuffer;
++    BOOL MapNoOverwriteOnDynamicBufferSRV;
++    BOOL MultisampleRTVWithForcedSampleCountOne;
++    BOOL SAD4ShaderInstructions;
++    BOOL ExtendedDoublesShaderInstructions;
++    BOOL ExtendedResourceSharing;
++} D3D11_FEATURE_DATA_D3D11_OPTIONS;
++
+ typedef enum D3D11_FILL_MODE
+ {
+     D3D11_FILL_WIREFRAME = 2,
+diff --git a/mingw-w64-headers/direct-x/include/d3d11_1.h b/mingw-w64-headers/direct-x/include/d3d11_1.h
+index e4ffaca..51ca735 100644
+--- a/mingw-w64-headers/direct-x/include/d3d11_1.h
++++ b/mingw-w64-headers/direct-x/include/d3d11_1.h
+@@ -471,7 +471,7 @@ ID3D11DeviceContext1 : public ID3D11DeviceContext
+ 
+     virtual void STDMETHODCALLTYPE ClearView(
+         ID3D11View *pView,
+-        FLOAT Color[4],
++        const FLOAT Color[4],
+         const D3D11_RECT *pRect,
+         UINT NumRects) = 0;
+ 
+@@ -1279,7 +1279,7 @@ typedef struct ID3D11DeviceContext1Vtbl {
+     void (STDMETHODCALLTYPE *ClearView)(
+         ID3D11DeviceContext1* This,
+         ID3D11View *pView,
+-        FLOAT Color[4],
++        const FLOAT Color[4],
+         const D3D11_RECT *pRect,
+         UINT NumRects);
+ 
+@@ -1836,7 +1836,7 @@ static FORCEINLINE void ID3D11DeviceContext1_CSGetConstantBuffers1(ID3D11DeviceC
+ static FORCEINLINE void ID3D11DeviceContext1_SwapDeviceContextState(ID3D11DeviceContext1* This,ID3DDeviceContextState *pState,ID3DDeviceContextState **ppPreviousState) {
+     This->lpVtbl->SwapDeviceContextState(This,pState,ppPreviousState);
+ }
+-static FORCEINLINE void ID3D11DeviceContext1_ClearView(ID3D11DeviceContext1* This,ID3D11View *pView,FLOAT Color[4],const D3D11_RECT *pRect,UINT NumRects) {
++static FORCEINLINE void ID3D11DeviceContext1_ClearView(ID3D11DeviceContext1* This,ID3D11View *pView,const FLOAT Color[4],const D3D11_RECT *pRect,UINT NumRects) {
+     This->lpVtbl->ClearView(This,pView,Color,pRect,NumRects);
+ }
+ static FORCEINLINE void ID3D11DeviceContext1_DiscardView1(ID3D11DeviceContext1* This,ID3D11View *pResourceView,const D3D11_RECT *pRects,UINT NumRects) {
+@@ -2049,7 +2049,7 @@ void __RPC_STUB ID3D11DeviceContext1_SwapDeviceContextState_Stub(
+ void STDMETHODCALLTYPE ID3D11DeviceContext1_ClearView_Proxy(
+     ID3D11DeviceContext1* This,
+     ID3D11View *pView,
+-    FLOAT Color[4],
++    const FLOAT Color[4],
+     const D3D11_RECT *pRect,
+     UINT NumRects);
+ void __RPC_STUB ID3D11DeviceContext1_ClearView_Stub(
+diff --git a/mingw-w64-headers/direct-x/include/d3d11_1.idl b/mingw-w64-headers/direct-x/include/d3d11_1.idl
+index 1ebfc5a..1a46abf 100644
+--- a/mingw-w64-headers/direct-x/include/d3d11_1.idl
++++ b/mingw-w64-headers/direct-x/include/d3d11_1.idl
+@@ -217,7 +217,7 @@ interface ID3D11DeviceContext1 : ID3D11DeviceContext
+ 
+     void ClearView(
+             ID3D11View *pView,
+-            FLOAT Color[4],
++            const FLOAT Color[4],
+             const D3D11_RECT *pRect,
+             UINT NumRects);
+ 
+diff --git a/mingw-w64-headers/direct-x/include/d3d11sdklayers.h b/mingw-w64-headers/direct-x/include/d3d11sdklayers.h
+index efce823..05faeba 100644
+--- a/mingw-w64-headers/direct-x/include/d3d11sdklayers.h
++++ b/mingw-w64-headers/direct-x/include/d3d11sdklayers.h
+@@ -17,6 +17,11 @@
+ 
+ /* Forward declarations */
+ 
++#ifndef __ID3D11Debug_FWD_DEFINED__
++#define __ID3D11Debug_FWD_DEFINED__
++typedef interface ID3D11Debug ID3D11Debug;
++#endif
++
+ #ifndef __ID3D11InfoQueue_FWD_DEFINED__
+ #define __ID3D11InfoQueue_FWD_DEFINED__
+ typedef interface ID3D11InfoQueue ID3D11InfoQueue;
+@@ -1190,6 +1195,10 @@ typedef enum D3D11_MESSAGE_ID {
+     D3D11_MESSAGE_ID_DEVICE_UNORDEREDACCESSVIEW_NOT_SET_DUE_TO_FLIP_PRESENT = 0x300163,
+     D3D11_MESSAGE_ID_D3D11_1_MESSAGES_END = 0x300164
+ } D3D11_MESSAGE_ID;
++typedef enum D3D11_RLDO_FLAGS {
++    D3D11_RLDO_SUMMARY = 1,
++    D3D11_RLDO_DETAIL = 2
++} D3D11_RLDO_FLAGS;
+ typedef struct D3D11_MESSAGE {
+     D3D11_MESSAGE_CATEGORY Category;
+     D3D11_MESSAGE_SEVERITY Severity;
+@@ -1211,6 +1220,238 @@ typedef struct D3D11_INFO_QUEUE_FILTER {
+ } D3D11_INFO_QUEUE_FILTER;
+ #define D3D11_INFO_QUEUE_DEFAULT_MESSAGE_COUNT_LIMIT 1024
+ /*****************************************************************************
++ * ID3D11Debug interface
++ */
++#ifndef __ID3D11Debug_INTERFACE_DEFINED__
++#define __ID3D11Debug_INTERFACE_DEFINED__
++
++DEFINE_GUID(IID_ID3D11Debug, 0x79cf2233, 0x7536, 0x4948, 0x9d,0x36, 0x1e,0x46,0x92,0xdc,0x57,0x60);
++#if defined(__cplusplus) && !defined(CINTERFACE)
++MIDL_INTERFACE("79cf2233-7536-4948-9d36-1e4692dc5760")
++ID3D11Debug : public IUnknown
++{
++    virtual HRESULT STDMETHODCALLTYPE SetFeatureMask(
++        UINT Mask) = 0;
++
++    virtual UINT STDMETHODCALLTYPE GetFeatureMask(
++        ) = 0;
++
++    virtual HRESULT STDMETHODCALLTYPE SetPresentPerRenderOpDelay(
++        UINT Milliseconds) = 0;
++
++    virtual UINT STDMETHODCALLTYPE GetPresentPerRenderOpDelay(
++        ) = 0;
++
++    virtual HRESULT STDMETHODCALLTYPE SetSwapChain(
++        IDXGISwapChain *pSwapChain) = 0;
++
++    virtual HRESULT STDMETHODCALLTYPE GetSwapChain(
++        IDXGISwapChain **ppSwapChain) = 0;
++
++    virtual HRESULT STDMETHODCALLTYPE ValidateContext(
++        ID3D11DeviceContext *pContext) = 0;
++
++    virtual HRESULT STDMETHODCALLTYPE ReportLiveDeviceObjects(
++        D3D11_RLDO_FLAGS Flags) = 0;
++
++    virtual HRESULT STDMETHODCALLTYPE ValidateContextForDispatch(
++        ID3D11DeviceContext *pContext) = 0;
++
++};
++#ifdef __CRT_UUID_DECL
++__CRT_UUID_DECL(ID3D11Debug, 0x79cf2233, 0x7536, 0x4948, 0x9d,0x36, 0x1e,0x46,0x92,0xdc,0x57,0x60)
++#endif
++#else
++typedef struct ID3D11DebugVtbl {
++    BEGIN_INTERFACE
++
++    /*** IUnknown methods ***/
++    HRESULT (STDMETHODCALLTYPE *QueryInterface)(
++        ID3D11Debug* This,
++        REFIID riid,
++        void **ppvObject);
++
++    ULONG (STDMETHODCALLTYPE *AddRef)(
++        ID3D11Debug* This);
++
++    ULONG (STDMETHODCALLTYPE *Release)(
++        ID3D11Debug* This);
++
++    /*** ID3D11Debug methods ***/
++    HRESULT (STDMETHODCALLTYPE *SetFeatureMask)(
++        ID3D11Debug* This,
++        UINT Mask);
++
++    UINT (STDMETHODCALLTYPE *GetFeatureMask)(
++        ID3D11Debug* This);
++
++    HRESULT (STDMETHODCALLTYPE *SetPresentPerRenderOpDelay)(
++        ID3D11Debug* This,
++        UINT Milliseconds);
++
++    UINT (STDMETHODCALLTYPE *GetPresentPerRenderOpDelay)(
++        ID3D11Debug* This);
++
++    HRESULT (STDMETHODCALLTYPE *SetSwapChain)(
++        ID3D11Debug* This,
++        IDXGISwapChain *pSwapChain);
++
++    HRESULT (STDMETHODCALLTYPE *GetSwapChain)(
++        ID3D11Debug* This,
++        IDXGISwapChain **ppSwapChain);
++
++    HRESULT (STDMETHODCALLTYPE *ValidateContext)(
++        ID3D11Debug* This,
++        ID3D11DeviceContext *pContext);
++
++    HRESULT (STDMETHODCALLTYPE *ReportLiveDeviceObjects)(
++        ID3D11Debug* This,
++        D3D11_RLDO_FLAGS Flags);
++
++    HRESULT (STDMETHODCALLTYPE *ValidateContextForDispatch)(
++        ID3D11Debug* This,
++        ID3D11DeviceContext *pContext);
++
++    END_INTERFACE
++} ID3D11DebugVtbl;
++interface ID3D11Debug {
++    CONST_VTBL ID3D11DebugVtbl* lpVtbl;
++};
++
++#ifdef COBJMACROS
++#ifndef WIDL_C_INLINE_WRAPPERS
++/*** IUnknown methods ***/
++#define ID3D11Debug_QueryInterface(This,riid,ppvObject) (This)->lpVtbl->QueryInterface(This,riid,ppvObject)
++#define ID3D11Debug_AddRef(This) (This)->lpVtbl->AddRef(This)
++#define ID3D11Debug_Release(This) (This)->lpVtbl->Release(This)
++/*** ID3D11Debug methods ***/
++#define ID3D11Debug_SetFeatureMask(This,Mask) (This)->lpVtbl->SetFeatureMask(This,Mask)
++#define ID3D11Debug_GetFeatureMask(This) (This)->lpVtbl->GetFeatureMask(This)
++#define ID3D11Debug_SetPresentPerRenderOpDelay(This,Milliseconds) (This)->lpVtbl->SetPresentPerRenderOpDelay(This,Milliseconds)
++#define ID3D11Debug_GetPresentPerRenderOpDelay(This) (This)->lpVtbl->GetPresentPerRenderOpDelay(This)
++#define ID3D11Debug_SetSwapChain(This,pSwapChain) (This)->lpVtbl->SetSwapChain(This,pSwapChain)
++#define ID3D11Debug_GetSwapChain(This,ppSwapChain) (This)->lpVtbl->GetSwapChain(This,ppSwapChain)
++#define ID3D11Debug_ValidateContext(This,pContext) (This)->lpVtbl->ValidateContext(This,pContext)
++#define ID3D11Debug_ReportLiveDeviceObjects(This,Flags) (This)->lpVtbl->ReportLiveDeviceObjects(This,Flags)
++#define ID3D11Debug_ValidateContextForDispatch(This,pContext) (This)->lpVtbl->ValidateContextForDispatch(This,pContext)
++#else
++/*** IUnknown methods ***/
++static FORCEINLINE HRESULT ID3D11Debug_QueryInterface(ID3D11Debug* This,REFIID riid,void **ppvObject) {
++    return This->lpVtbl->QueryInterface(This,riid,ppvObject);
++}
++static FORCEINLINE ULONG ID3D11Debug_AddRef(ID3D11Debug* This) {
++    return This->lpVtbl->AddRef(This);
++}
++static FORCEINLINE ULONG ID3D11Debug_Release(ID3D11Debug* This) {
++    return This->lpVtbl->Release(This);
++}
++/*** ID3D11Debug methods ***/
++static FORCEINLINE HRESULT ID3D11Debug_SetFeatureMask(ID3D11Debug* This,UINT Mask) {
++    return This->lpVtbl->SetFeatureMask(This,Mask);
++}
++static FORCEINLINE UINT ID3D11Debug_GetFeatureMask(ID3D11Debug* This) {
++    return This->lpVtbl->GetFeatureMask(This);
++}
++static FORCEINLINE HRESULT ID3D11Debug_SetPresentPerRenderOpDelay(ID3D11Debug* This,UINT Milliseconds) {
++    return This->lpVtbl->SetPresentPerRenderOpDelay(This,Milliseconds);
++}
++static FORCEINLINE UINT ID3D11Debug_GetPresentPerRenderOpDelay(ID3D11Debug* This) {
++    return This->lpVtbl->GetPresentPerRenderOpDelay(This);
++}
++static FORCEINLINE HRESULT ID3D11Debug_SetSwapChain(ID3D11Debug* This,IDXGISwapChain *pSwapChain) {
++    return This->lpVtbl->SetSwapChain(This,pSwapChain);
++}
++static FORCEINLINE HRESULT ID3D11Debug_GetSwapChain(ID3D11Debug* This,IDXGISwapChain **ppSwapChain) {
++    return This->lpVtbl->GetSwapChain(This,ppSwapChain);
++}
++static FORCEINLINE HRESULT ID3D11Debug_ValidateContext(ID3D11Debug* This,ID3D11DeviceContext *pContext) {
++    return This->lpVtbl->ValidateContext(This,pContext);
++}
++static FORCEINLINE HRESULT ID3D11Debug_ReportLiveDeviceObjects(ID3D11Debug* This,D3D11_RLDO_FLAGS Flags) {
++    return This->lpVtbl->ReportLiveDeviceObjects(This,Flags);
++}
++static FORCEINLINE HRESULT ID3D11Debug_ValidateContextForDispatch(ID3D11Debug* This,ID3D11DeviceContext *pContext) {
++    return This->lpVtbl->ValidateContextForDispatch(This,pContext);
++}
++#endif
++#endif
++
++#endif
++
++HRESULT STDMETHODCALLTYPE ID3D11Debug_SetFeatureMask_Proxy(
++    ID3D11Debug* This,
++    UINT Mask);
++void __RPC_STUB ID3D11Debug_SetFeatureMask_Stub(
++    IRpcStubBuffer* This,
++    IRpcChannelBuffer* pRpcChannelBuffer,
++    PRPC_MESSAGE pRpcMessage,
++    DWORD* pdwStubPhase);
++UINT STDMETHODCALLTYPE ID3D11Debug_GetFeatureMask_Proxy(
++    ID3D11Debug* This);
++void __RPC_STUB ID3D11Debug_GetFeatureMask_Stub(
++    IRpcStubBuffer* This,
++    IRpcChannelBuffer* pRpcChannelBuffer,
++    PRPC_MESSAGE pRpcMessage,
++    DWORD* pdwStubPhase);
++HRESULT STDMETHODCALLTYPE ID3D11Debug_SetPresentPerRenderOpDelay_Proxy(
++    ID3D11Debug* This,
++    UINT Milliseconds);
++void __RPC_STUB ID3D11Debug_SetPresentPerRenderOpDelay_Stub(
++    IRpcStubBuffer* This,
++    IRpcChannelBuffer* pRpcChannelBuffer,
++    PRPC_MESSAGE pRpcMessage,
++    DWORD* pdwStubPhase);
++UINT STDMETHODCALLTYPE ID3D11Debug_GetPresentPerRenderOpDelay_Proxy(
++    ID3D11Debug* This);
++void __RPC_STUB ID3D11Debug_GetPresentPerRenderOpDelay_Stub(
++    IRpcStubBuffer* This,
++    IRpcChannelBuffer* pRpcChannelBuffer,
++    PRPC_MESSAGE pRpcMessage,
++    DWORD* pdwStubPhase);
++HRESULT STDMETHODCALLTYPE ID3D11Debug_SetSwapChain_Proxy(
++    ID3D11Debug* This,
++    IDXGISwapChain *pSwapChain);
++void __RPC_STUB ID3D11Debug_SetSwapChain_Stub(
++    IRpcStubBuffer* This,
++    IRpcChannelBuffer* pRpcChannelBuffer,
++    PRPC_MESSAGE pRpcMessage,
++    DWORD* pdwStubPhase);
++HRESULT STDMETHODCALLTYPE ID3D11Debug_GetSwapChain_Proxy(
++    ID3D11Debug* This,
++    IDXGISwapChain **ppSwapChain);
++void __RPC_STUB ID3D11Debug_GetSwapChain_Stub(
++    IRpcStubBuffer* This,
++    IRpcChannelBuffer* pRpcChannelBuffer,
++    PRPC_MESSAGE pRpcMessage,
++    DWORD* pdwStubPhase);
++HRESULT STDMETHODCALLTYPE ID3D11Debug_ValidateContext_Proxy(
++    ID3D11Debug* This,
++    ID3D11DeviceContext *pContext);
++void __RPC_STUB ID3D11Debug_ValidateContext_Stub(
++    IRpcStubBuffer* This,
++    IRpcChannelBuffer* pRpcChannelBuffer,
++    PRPC_MESSAGE pRpcMessage,
++    DWORD* pdwStubPhase);
++HRESULT STDMETHODCALLTYPE ID3D11Debug_ReportLiveDeviceObjects_Proxy(
++    ID3D11Debug* This,
++    D3D11_RLDO_FLAGS Flags);
++void __RPC_STUB ID3D11Debug_ReportLiveDeviceObjects_Stub(
++    IRpcStubBuffer* This,
++    IRpcChannelBuffer* pRpcChannelBuffer,
++    PRPC_MESSAGE pRpcMessage,
++    DWORD* pdwStubPhase);
++HRESULT STDMETHODCALLTYPE ID3D11Debug_ValidateContextForDispatch_Proxy(
++    ID3D11Debug* This,
++    ID3D11DeviceContext *pContext);
++void __RPC_STUB ID3D11Debug_ValidateContextForDispatch_Stub(
++    IRpcStubBuffer* This,
++    IRpcChannelBuffer* pRpcChannelBuffer,
++    PRPC_MESSAGE pRpcMessage,
++    DWORD* pdwStubPhase);
++
++#endif  /* __ID3D11Debug_INTERFACE_DEFINED__ */
++
++/*****************************************************************************
+  * ID3D11InfoQueue interface
+  */
+ #ifndef __ID3D11InfoQueue_INTERFACE_DEFINED__
+diff --git a/mingw-w64-headers/direct-x/include/d3d11sdklayers.idl b/mingw-w64-headers/direct-x/include/d3d11sdklayers.idl
+index e74922a..638e53c 100644
+--- a/mingw-w64-headers/direct-x/include/d3d11sdklayers.idl
++++ b/mingw-w64-headers/direct-x/include/d3d11sdklayers.idl
+@@ -1184,6 +1184,11 @@ typedef enum D3D11_MESSAGE_ID {
+     D3D11_MESSAGE_ID_D3D11_1_MESSAGES_END
+ } D3D11_MESSAGE_ID;
+ 
++typedef enum D3D11_RLDO_FLAGS {
++    D3D11_RLDO_SUMMARY = 1,
++    D3D11_RLDO_DETAIL = 2
++} D3D11_RLDO_FLAGS;
++
+ typedef struct D3D11_MESSAGE {
+     D3D11_MESSAGE_CATEGORY Category;
+     D3D11_MESSAGE_SEVERITY Severity;
+@@ -1210,6 +1215,24 @@ cpp_quote("#define D3D11_INFO_QUEUE_DEFAULT_MESSAGE_COUNT_LIMIT 1024")
+ 
+ [
+     object,
++    uuid(79cf2233-7536-4948-9d36-1e4692dc5760),
++    local,
++    pointer_default(unique)
++]
++interface ID3D11Debug : IUnknown {
++    HRESULT SetFeatureMask(UINT Mask);
++    UINT GetFeatureMask();
++    HRESULT SetPresentPerRenderOpDelay(UINT Milliseconds);
++    UINT GetPresentPerRenderOpDelay();
++    HRESULT SetSwapChain(IDXGISwapChain *pSwapChain);
++    HRESULT GetSwapChain(IDXGISwapChain **ppSwapChain);
++    HRESULT ValidateContext(ID3D11DeviceContext *pContext);
++    HRESULT ReportLiveDeviceObjects(D3D11_RLDO_FLAGS Flags);
++    HRESULT ValidateContextForDispatch(ID3D11DeviceContext *pContext);
++}
++
++[
++    object,
+     uuid(6543dbb6-1b48-42f5-ab82-e97ec74326f6),
+     local,
+     pointer_default(unique)
+diff --git a/mingw-w64-headers/direct-x/include/dxgi1_2.h b/mingw-w64-headers/direct-x/include/dxgi1_2.h
+index 72ac571..de3f359 100644
+--- a/mingw-w64-headers/direct-x/include/dxgi1_2.h
++++ b/mingw-w64-headers/direct-x/include/dxgi1_2.h
+@@ -32,6 +32,11 @@ typedef interface IDXGISwapChain1 IDXGISwapChain1;
+ typedef interface IDXGIFactory2 IDXGIFactory2;
+ #endif
+ 
++#ifndef __IDXGIAdapter2_FWD_DEFINED__
++#define __IDXGIAdapter2_FWD_DEFINED__
++typedef interface IDXGIAdapter2 IDXGIAdapter2;
++#endif
++
+ /* Headers for imported files */
+ 
+ #include <dxgi.h>
+@@ -1187,6 +1192,199 @@ void __RPC_STUB IDXGIFactory2_CreateSwapChainForComposition_Stub(
+ 
+ #endif  /* __IDXGIFactory2_INTERFACE_DEFINED__ */
+ 
++typedef enum DXGI_GRAPHICS_PREEMPTION_GRANULARITY {
++    DXGI_GRAPHICS_PREEMPTION_DMA_BUFFER_BOUNDARY = 0,
++    DXGI_GRAPHICS_PREEMPTION_PRIMITIVE_BOUNDARY = 1,
++    DXGI_GRAPHICS_PREEMPTION_TRIANGLE_BOUNDARY = 2,
++    DXGI_GRAPHICS_PREEMPTION_PIXEL_BOUNDARY = 3,
++    DXGI_GRAPHICS_PREEMPTION_INSTRUCTION_BOUNDARY = 4
++} DXGI_GRAPHICS_PREEMPTION_GRANULARITY;
++typedef enum DXGI_COMPUTE_PREEMPTION_GRANULARITY {
++    DXGI_COMPUTE_PREEMPTION_DMA_BUFFER_BOUNDARY = 0,
++    DXGI_COMPUTE_PREEMPTION_DISPATCH_BOUNDARY = 1,
++    DXGI_COMPUTE_PREEMPTION_THREAD_GROUP_BOUNDARY = 2,
++    DXGI_COMPUTE_PREEMPTION_THREAD_BOUNDARY = 3,
++    DXGI_COMPUTE_PREEMPTION_INSTRUCTION_BOUNDARY = 4
++} DXGI_COMPUTE_PREEMPTION_GRANULARITY;
++typedef struct DXGI_ADAPTER_DESC2 {
++    WCHAR Description[128];
++    UINT VendorId;
++    UINT DeviceId;
++    UINT SubSysId;
++    UINT Revision;
++    SIZE_T DedicatedVideoMemory;
++    SIZE_T DedicatedSystemMemory;
++    SIZE_T SharedSystemMemory;
++    LUID AdapterLuid;
++    UINT Flags;
++    DXGI_GRAPHICS_PREEMPTION_GRANULARITY GraphicsPreemptionGranularity;
++    DXGI_COMPUTE_PREEMPTION_GRANULARITY ComputePreemptionGranularity;
++} DXGI_ADAPTER_DESC2;
++/*****************************************************************************
++ * IDXGIAdapter2 interface
++ */
++#ifndef __IDXGIAdapter2_INTERFACE_DEFINED__
++#define __IDXGIAdapter2_INTERFACE_DEFINED__
++
++DEFINE_GUID(IID_IDXGIAdapter2, 0x0aa1ae0a, 0xfa0e, 0x4b84, 0x86,0x44, 0xe0,0x5f,0xf8,0xe5,0xac,0xb5);
++#if defined(__cplusplus) && !defined(CINTERFACE)
++MIDL_INTERFACE("0aa1ae0a-fa0e-4b84-8644-e05ff8e5acb5")
++IDXGIAdapter2 : public IDXGIAdapter1
++{
++    virtual HRESULT STDMETHODCALLTYPE GetDesc2(
++        DXGI_ADAPTER_DESC2 *pDesc) = 0;
++
++};
++#ifdef __CRT_UUID_DECL
++__CRT_UUID_DECL(IDXGIAdapter2, 0x0aa1ae0a, 0xfa0e, 0x4b84, 0x86,0x44, 0xe0,0x5f,0xf8,0xe5,0xac,0xb5)
++#endif
++#else
++typedef struct IDXGIAdapter2Vtbl {
++    BEGIN_INTERFACE
++
++    /*** IUnknown methods ***/
++    HRESULT (STDMETHODCALLTYPE *QueryInterface)(
++        IDXGIAdapter2* This,
++        REFIID riid,
++        void **ppvObject);
++
++    ULONG (STDMETHODCALLTYPE *AddRef)(
++        IDXGIAdapter2* This);
++
++    ULONG (STDMETHODCALLTYPE *Release)(
++        IDXGIAdapter2* This);
++
++    /*** IDXGIObject methods ***/
++    HRESULT (STDMETHODCALLTYPE *SetPrivateData)(
++        IDXGIAdapter2* This,
++        REFGUID guid,
++        UINT data_size,
++        const void *data);
++
++    HRESULT (STDMETHODCALLTYPE *SetPrivateDataInterface)(
++        IDXGIAdapter2* This,
++        REFGUID guid,
++        const IUnknown *object);
++
++    HRESULT (STDMETHODCALLTYPE *GetPrivateData)(
++        IDXGIAdapter2* This,
++        REFGUID guid,
++        UINT *data_size,
++        void *data);
++
++    HRESULT (STDMETHODCALLTYPE *GetParent)(
++        IDXGIAdapter2* This,
++        REFIID riid,
++        void **parent);
++
++    /*** IDXGIAdapter methods ***/
++    HRESULT (STDMETHODCALLTYPE *EnumOutputs)(
++        IDXGIAdapter2* This,
++        UINT output_idx,
++        IDXGIOutput **output);
++
++    HRESULT (STDMETHODCALLTYPE *GetDesc)(
++        IDXGIAdapter2* This,
++        DXGI_ADAPTER_DESC *desc);
++
++    HRESULT (STDMETHODCALLTYPE *CheckInterfaceSupport)(
++        IDXGIAdapter2* This,
++        REFGUID guid,
++        LARGE_INTEGER *umd_version);
++
++    /*** IDXGIAdapter1 methods ***/
++    HRESULT (STDMETHODCALLTYPE *GetDesc1)(
++        IDXGIAdapter2* This,
++        DXGI_ADAPTER_DESC1 *pDesc);
++
++    /*** IDXGIAdapter2 methods ***/
++    HRESULT (STDMETHODCALLTYPE *GetDesc2)(
++        IDXGIAdapter2* This,
++        DXGI_ADAPTER_DESC2 *pDesc);
++
++    END_INTERFACE
++} IDXGIAdapter2Vtbl;
++interface IDXGIAdapter2 {
++    CONST_VTBL IDXGIAdapter2Vtbl* lpVtbl;
++};
++
++#ifdef COBJMACROS
++#ifndef WIDL_C_INLINE_WRAPPERS
++/*** IUnknown methods ***/
++#define IDXGIAdapter2_QueryInterface(This,riid,ppvObject) (This)->lpVtbl->QueryInterface(This,riid,ppvObject)
++#define IDXGIAdapter2_AddRef(This) (This)->lpVtbl->AddRef(This)
++#define IDXGIAdapter2_Release(This) (This)->lpVtbl->Release(This)
++/*** IDXGIObject methods ***/
++#define IDXGIAdapter2_SetPrivateData(This,guid,data_size,data) (This)->lpVtbl->SetPrivateData(This,guid,data_size,data)
++#define IDXGIAdapter2_SetPrivateDataInterface(This,guid,object) (This)->lpVtbl->SetPrivateDataInterface(This,guid,object)
++#define IDXGIAdapter2_GetPrivateData(This,guid,data_size,data) (This)->lpVtbl->GetPrivateData(This,guid,data_size,data)
++#define IDXGIAdapter2_GetParent(This,riid,parent) (This)->lpVtbl->GetParent(This,riid,parent)
++/*** IDXGIAdapter methods ***/
++#define IDXGIAdapter2_EnumOutputs(This,output_idx,output) (This)->lpVtbl->EnumOutputs(This,output_idx,output)
++#define IDXGIAdapter2_GetDesc(This,desc) (This)->lpVtbl->GetDesc(This,desc)
++#define IDXGIAdapter2_CheckInterfaceSupport(This,guid,umd_version) (This)->lpVtbl->CheckInterfaceSupport(This,guid,umd_version)
++/*** IDXGIAdapter1 methods ***/
++#define IDXGIAdapter2_GetDesc1(This,pDesc) (This)->lpVtbl->GetDesc1(This,pDesc)
++/*** IDXGIAdapter2 methods ***/
++#define IDXGIAdapter2_GetDesc2(This,pDesc) (This)->lpVtbl->GetDesc2(This,pDesc)
++#else
++/*** IUnknown methods ***/
++static FORCEINLINE HRESULT IDXGIAdapter2_QueryInterface(IDXGIAdapter2* This,REFIID riid,void **ppvObject) {
++    return This->lpVtbl->QueryInterface(This,riid,ppvObject);
++}
++static FORCEINLINE ULONG IDXGIAdapter2_AddRef(IDXGIAdapter2* This) {
++    return This->lpVtbl->AddRef(This);
++}
++static FORCEINLINE ULONG IDXGIAdapter2_Release(IDXGIAdapter2* This) {
++    return This->lpVtbl->Release(This);
++}
++/*** IDXGIObject methods ***/
++static FORCEINLINE HRESULT IDXGIAdapter2_SetPrivateData(IDXGIAdapter2* This,REFGUID guid,UINT data_size,const void *data) {
++    return This->lpVtbl->SetPrivateData(This,guid,data_size,data);
++}
++static FORCEINLINE HRESULT IDXGIAdapter2_SetPrivateDataInterface(IDXGIAdapter2* This,REFGUID guid,const IUnknown *object) {
++    return This->lpVtbl->SetPrivateDataInterface(This,guid,object);
++}
++static FORCEINLINE HRESULT IDXGIAdapter2_GetPrivateData(IDXGIAdapter2* This,REFGUID guid,UINT *data_size,void *data) {
++    return This->lpVtbl->GetPrivateData(This,guid,data_size,data);
++}
++static FORCEINLINE HRESULT IDXGIAdapter2_GetParent(IDXGIAdapter2* This,REFIID riid,void **parent) {
++    return This->lpVtbl->GetParent(This,riid,parent);
++}
++/*** IDXGIAdapter methods ***/
++static FORCEINLINE HRESULT IDXGIAdapter2_EnumOutputs(IDXGIAdapter2* This,UINT output_idx,IDXGIOutput **output) {
++    return This->lpVtbl->EnumOutputs(This,output_idx,output);
++}
++static FORCEINLINE HRESULT IDXGIAdapter2_GetDesc(IDXGIAdapter2* This,DXGI_ADAPTER_DESC *desc) {
++    return This->lpVtbl->GetDesc(This,desc);
++}
++static FORCEINLINE HRESULT IDXGIAdapter2_CheckInterfaceSupport(IDXGIAdapter2* This,REFGUID guid,LARGE_INTEGER *umd_version) {
++    return This->lpVtbl->CheckInterfaceSupport(This,guid,umd_version);
++}
++/*** IDXGIAdapter1 methods ***/
++static FORCEINLINE HRESULT IDXGIAdapter2_GetDesc1(IDXGIAdapter2* This,DXGI_ADAPTER_DESC1 *pDesc) {
++    return This->lpVtbl->GetDesc1(This,pDesc);
++}
++/*** IDXGIAdapter2 methods ***/
++static FORCEINLINE HRESULT IDXGIAdapter2_GetDesc2(IDXGIAdapter2* This,DXGI_ADAPTER_DESC2 *pDesc) {
++    return This->lpVtbl->GetDesc2(This,pDesc);
++}
++#endif
++#endif
++
++#endif
++
++HRESULT STDMETHODCALLTYPE IDXGIAdapter2_GetDesc2_Proxy(
++    IDXGIAdapter2* This,
++    DXGI_ADAPTER_DESC2 *pDesc);
++void __RPC_STUB IDXGIAdapter2_GetDesc2_Stub(
++    IRpcStubBuffer* This,
++    IRpcChannelBuffer* pRpcChannelBuffer,
++    PRPC_MESSAGE pRpcMessage,
++    DWORD* pdwStubPhase);
++
++#endif  /* __IDXGIAdapter2_INTERFACE_DEFINED__ */
++
+ /* Begin additional prototypes for all interfaces */
+ 
+ 
+diff --git a/mingw-w64-headers/direct-x/include/dxgi1_2.idl b/mingw-w64-headers/direct-x/include/dxgi1_2.idl
+index 775b81c..92f9c0e 100644
+--- a/mingw-w64-headers/direct-x/include/dxgi1_2.idl
++++ b/mingw-w64-headers/direct-x/include/dxgi1_2.idl
+@@ -190,3 +190,45 @@ interface IDXGIFactory2 : IDXGIFactory1
+             [in]  IDXGIOutput *pRestrictToOutput,
+             [out] IDXGISwapChain1 **ppSwapChain);
+ }
++
++typedef enum DXGI_GRAPHICS_PREEMPTION_GRANULARITY {
++    DXGI_GRAPHICS_PREEMPTION_DMA_BUFFER_BOUNDARY,
++    DXGI_GRAPHICS_PREEMPTION_PRIMITIVE_BOUNDARY,
++    DXGI_GRAPHICS_PREEMPTION_TRIANGLE_BOUNDARY,
++    DXGI_GRAPHICS_PREEMPTION_PIXEL_BOUNDARY,
++    DXGI_GRAPHICS_PREEMPTION_INSTRUCTION_BOUNDARY
++} DXGI_GRAPHICS_PREEMPTION_GRANULARITY;
++
++typedef enum DXGI_COMPUTE_PREEMPTION_GRANULARITY {
++    DXGI_COMPUTE_PREEMPTION_DMA_BUFFER_BOUNDARY,
++    DXGI_COMPUTE_PREEMPTION_DISPATCH_BOUNDARY,
++    DXGI_COMPUTE_PREEMPTION_THREAD_GROUP_BOUNDARY,
++    DXGI_COMPUTE_PREEMPTION_THREAD_BOUNDARY,
++    DXGI_COMPUTE_PREEMPTION_INSTRUCTION_BOUNDARY
++} DXGI_COMPUTE_PREEMPTION_GRANULARITY;
++
++typedef struct DXGI_ADAPTER_DESC2 {
++    WCHAR Description[128];
++    UINT VendorId;
++    UINT DeviceId;
++    UINT SubSysId;
++    UINT Revision;
++    SIZE_T DedicatedVideoMemory;
++    SIZE_T DedicatedSystemMemory;
++    SIZE_T SharedSystemMemory;
++    LUID AdapterLuid;
++    UINT Flags;
++    DXGI_GRAPHICS_PREEMPTION_GRANULARITY GraphicsPreemptionGranularity;
++    DXGI_COMPUTE_PREEMPTION_GRANULARITY ComputePreemptionGranularity;
++} DXGI_ADAPTER_DESC2;
++
++[
++    object,
++    uuid(0aa1ae0a-fa0e-4b84-8644-e05ff8e5acb5),
++    local,
++    pointer_default(unique)
++]
++interface IDXGIAdapter2 : IDXGIAdapter1
++{
++    HRESULT GetDesc2([out] DXGI_ADAPTER_DESC2 *pDesc);
++}

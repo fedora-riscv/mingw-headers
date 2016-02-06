@@ -1,0 +1,19 @@
+From 9e485077ead88db6f56412c5c23d9b14ebd384f2 Mon Sep 17 00:00:00 2001
+From: Jacek Caban <jacek@codeweavers.com>
+Date: Tue, 19 May 2015 12:41:21 +0200
+Subject: d2d1_1.h: Added missing D2D1_PRIMITIVE_BLEND_* values.
+
+
+diff --git a/mingw-w64-headers/include/d2d1_1.h b/mingw-w64-headers/include/d2d1_1.h
+index 36a9864..2eb398a 100644
+--- a/mingw-w64-headers/include/d2d1_1.h
++++ b/mingw-w64-headers/include/d2d1_1.h
+@@ -150,6 +150,8 @@ typedef enum D2D1_COMPOSITE_MODE {
+ typedef enum D2D1_PRIMITIVE_BLEND {
+     D2D1_PRIMITIVE_BLEND_SOURCE_OVER = 0,
+     D2D1_PRIMITIVE_BLEND_COPY        = 1,
++    D2D1_PRIMITIVE_BLEND_MIN         = 2,
++    D2D1_PRIMITIVE_BLEND_ADD         = 3,
+     D2D1_PRIMITIVE_BLEND_FORCE_DWORD = 0xffffffff
+ } D2D1_PRIMITIVE_BLEND;
+ 

@@ -22,7 +22,7 @@
 
 Name:           mingw-headers
 Version:        4.0.4
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Win32/Win64 header files
 
 License:        Public Domain and LGPLv2+ and ZPLv2.1
@@ -61,6 +61,16 @@ Patch11:        commit-b3d0437
 Patch12:        commit-e5ebc15
 Patch13:        commit-21c9cbf
 Patch14:        commit-6249fb9
+
+# Additional backported commits for wine-gecko 2.44
+Patch15:        commit-ace70f1
+Patch16:        commit-dcb7580
+Patch17:        commit-3f14056
+Patch18:        commit-7b225ae
+Patch19:        commit-44bd1f9
+Patch20:        commit-9e48507
+Patch21:        commit-7a2e581
+Patch22:        commit-790a654
 
 # Backported commit required to build mingw-qt5-qtactiveqt 5.5.0
 Patch99:        commit-5f5e2c1
@@ -127,6 +137,14 @@ unzip %{S:0}
 %patch12 -p1
 %patch13 -p1
 %patch14 -p1
+%patch15 -p1
+%patch16 -p1
+%patch17 -p1
+%patch18 -p1
+%patch19 -p1
+%patch20 -p1
+%patch21 -p1
+%patch22 -p1
 
 # mingw-qt5-qtactiveqt backports
 %patch99 -p1
@@ -164,6 +182,9 @@ rm -f $RPM_BUILD_ROOT%{mingw64_includedir}/pthread_unistd.h
 
 
 %changelog
+* Sat Feb  6 2016 Erik van Pienbroek <epienbro@fedoraproject.org> - 4.0.4-4
+- Backported various commits which are required to build wine-gecko 2.44
+
 * Fri Aug 14 2015 Erik van Pienbroek <epienbro@fedoraproject.org> - 4.0.4-3
 - Backport more commits which are required to build wine-gecko 2.40
 
