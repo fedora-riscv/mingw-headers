@@ -1,7 +1,7 @@
-#%%global snapshot_date 20160204
-#%%global snapshot_rev 38410ad06264949efcb331f7a63575c6be31c5e4
-#%%global snapshot_rev_short %(echo %snapshot_rev | cut -c1-6)
-#%%global branch trunk
+%global snapshot_date 20160723
+%global snapshot_rev 65a0c3298db7cc5cbded63259663cb29e4780a56
+%global snapshot_rev_short %(echo %snapshot_rev | cut -c1-6)
+%global branch v5.x
 
 %global pre rc2
 
@@ -22,7 +22,7 @@
 
 Name:           mingw-headers
 Version:        5.0
-Release:        0.1.rc2%{?dist}
+Release:        0.2.rc2.%{branch}.git%{snapshot_rev_short}.%{snapshot_date}%{?dist}
 Summary:        Win32/Win64 header files
 
 License:        Public Domain and LGPLv2+ and ZPLv2.1
@@ -45,6 +45,9 @@ Source0:        http://downloads.sourceforge.net/mingw-w64/mingw-w64-v%{version}
 # headers to be regenerated from their .idl source. Prevent this from
 # happening as the .idl files shouldn't be used by default
 Patch0:         mingw-headers-no-widl.patch
+
+# Backported patch needed by latest wine-gecko
+Patch1:         commit-7de6266
 
 BuildArch:      noarch
 
@@ -92,6 +95,7 @@ unzip %{S:0}
 %endif
 
 %patch0 -p0 -b .idl
+%patch1 -p1 -b .gecko
 
 
 %build
@@ -126,6 +130,10 @@ rm -f $RPM_BUILD_ROOT%{mingw64_includedir}/pthread_unistd.h
 
 
 %changelog
+* Sat Jul 23 2016 Erik van Pienbroek <epienbro@fedoraproject.org> - 5.0-0.2.rc2.v5.x.git65a0c3.20160723
+- Update to 20160204 snapshot of the v5.x branch (git rev 65a0c3)
+- Backported patch to build failure of latest wine-gecko
+
 * Sun Mar 27 2016 Erik van Pienbroek <epienbro@fedoraproject.org> - 5.0-0.1.rc2
 - Update to 5.0rc2
 
