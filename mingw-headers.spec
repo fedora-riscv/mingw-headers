@@ -1,9 +1,9 @@
-%global snapshot_date 20160723
-%global snapshot_rev 65a0c3298db7cc5cbded63259663cb29e4780a56
-%global snapshot_rev_short %(echo %snapshot_rev | cut -c1-6)
-%global branch v5.x
+#%%global snapshot_date 20160723
+#%%global snapshot_rev 65a0c3298db7cc5cbded63259663cb29e4780a56
+#%%global snapshot_rev_short %(echo %snapshot_rev | cut -c1-6)
+#%%global branch v5.x
 
-%global pre rc2
+#%%global pre rc2
 
 # The mingw-w64-headers provide the headers pthread_time.h
 # and pthread_unistd.h by default and are dummy headers.
@@ -21,8 +21,8 @@
 %endif
 
 Name:           mingw-headers
-Version:        5.0
-Release:        0.2.rc2.%{branch}.git%{snapshot_rev_short}.%{snapshot_date}%{?dist}
+Version:        5.0.0
+Release:        1%{?dist}
 Summary:        Win32/Win64 header files
 
 License:        Public Domain and LGPLv2+ and ZPLv2.1
@@ -130,6 +130,9 @@ rm -f $RPM_BUILD_ROOT%{mingw64_includedir}/pthread_unistd.h
 
 
 %changelog
+* Wed Oct 26 2016 Kalev Lember <klember@redhat.com> - 5.0.0-1
+- Update to 5.0.0
+
 * Sat Jul 23 2016 Erik van Pienbroek <epienbro@fedoraproject.org> - 5.0-0.2.rc2.v5.x.git65a0c3.20160723
 - Update to 20160204 snapshot of the v5.x branch (git rev 65a0c3)
 - Backported patch to build failure of latest wine-gecko
