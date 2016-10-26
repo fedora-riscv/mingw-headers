@@ -119,11 +119,11 @@ rm -f $RPM_BUILD_ROOT%{mingw64_includedir}/pthread_unistd.h
 
 
 %files -n mingw32-headers
-%doc COPYING DISCLAIMER DISCLAIMER.PD mingw-w64-headers/direct-x/COPYING.LIB
+%license COPYING DISCLAIMER DISCLAIMER.PD mingw-w64-headers/direct-x/COPYING.LIB
 %{mingw32_includedir}/*
 
 %files -n mingw64-headers
-%doc COPYING DISCLAIMER DISCLAIMER.PD mingw-w64-headers/direct-x/COPYING.LIB
+%license COPYING DISCLAIMER DISCLAIMER.PD mingw-w64-headers/direct-x/COPYING.LIB
 %{mingw64_includedir}/*
 
 
@@ -131,6 +131,7 @@ rm -f $RPM_BUILD_ROOT%{mingw64_includedir}/pthread_unistd.h
 * Wed Oct 26 2016 Kalev Lember <klember@redhat.com> - 5.0.0-1
 - Update to 5.0.0
 - Don't set group tags
+- Use license macro
 
 * Sat Jul 23 2016 Erik van Pienbroek <epienbro@fedoraproject.org> - 5.0-0.2.rc2.v5.x.git65a0c3.20160723
 - Update to 20160204 snapshot of the v5.x branch (git rev 65a0c3)
