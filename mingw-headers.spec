@@ -21,7 +21,7 @@
 %endif
 
 Name:           mingw-headers
-Version:        5.0.0
+Version:        5.0.1
 Release:        1%{?dist}
 Summary:        Win32/Win64 header files
 
@@ -128,6 +128,9 @@ rm -f $RPM_BUILD_ROOT%{mingw64_includedir}/pthread_unistd.h
 
 
 %changelog
+* Thu Jan 26 2017 Kalev Lember <klember@redhat.com> - 5.0.1-1
+- Update to 5.0.1
+
 * Wed Oct 26 2016 Kalev Lember <klember@redhat.com> - 5.0.0-1
 - Update to 5.0.0
 - Don't set group tags
