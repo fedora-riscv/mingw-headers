@@ -21,8 +21,8 @@
 %endif
 
 Name:           mingw-headers
-Version:        5.0.1
-Release:        2%{?dist}
+Version:        5.0.2
+Release:        1%{?dist}
 Summary:        Win32/Win64 header files
 
 License:        Public Domain and LGPLv2+ and ZPLv2.1
@@ -128,6 +128,9 @@ rm -f $RPM_BUILD_ROOT%{mingw64_includedir}/pthread_unistd.h
 
 
 %changelog
+* Wed May 17 2017 Kalev Lember <klember@redhat.com> - 5.0.2-1
+- Update to 5.0.2
+
 * Fri Feb 10 2017 Fedora Release Engineering <releng@fedoraproject.org> - 5.0.1-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
 
