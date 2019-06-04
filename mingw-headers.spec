@@ -21,8 +21,8 @@
 %endif
 
 Name:           mingw-headers
-Version:        5.0.4
-Release:        3%{?dist}
+Version:        6.0.0
+Release:        1%{?dist}
 Summary:        Win32/Win64 header files
 
 License:        Public Domain and LGPLv2+ and ZPLv2.1
@@ -43,9 +43,6 @@ Source0:        http://downloads.sourceforge.net/mingw-w64/mingw-w64-v%{version}
 # headers to be regenerated from their .idl source. Prevent this from
 # happening as the .idl files shouldn't be used by default
 Patch0:         mingw-headers-no-widl.patch
-
-# Backported patch needed by latest wine-gecko
-Patch1:         commit-7de6266
 
 BuildArch:      noarch
 
@@ -87,13 +84,10 @@ rm -rf mingw-w64-v%{version}
 mkdir mingw-w64-v%{version}
 cd mingw-w64-v%{version}
 unzip %{S:0}
-%setup -q -D -T -n mingw-w64-v%{version}/mingw-w64-mingw-w64-%{snapshot_rev}
+%autosetup -p1 -D -T -n mingw-w64-v%{version}/mingw-w64-mingw-w64-%{snapshot_rev}
 %else
-%setup -q -n mingw-w64-v%{version}%{?pre:-%{pre}}
+%autosetup -p1 -n mingw-w64-v%{version}%{?pre:-%{pre}}
 %endif
-
-%patch0 -p0 -b .idl
-%patch1 -p1 -b .gecko
 
 
 %build
@@ -104,17 +98,17 @@ popd
 
 %install
 pushd mingw-w64-headers
-    %mingw_make_install DESTDIR=$RPM_BUILD_ROOT 
+    %mingw_make_install DESTDIR=%{buildroot}
 popd
 
 # Drop the dummy pthread headers if necessary
 %if 0%{?bundle_dummy_pthread_headers} == 0
-rm -f $RPM_BUILD_ROOT%{mingw32_includedir}/pthread_signal.h
-rm -f $RPM_BUILD_ROOT%{mingw32_includedir}/pthread_time.h
-rm -f $RPM_BUILD_ROOT%{mingw32_includedir}/pthread_unistd.h
-rm -f $RPM_BUILD_ROOT%{mingw64_includedir}/pthread_signal.h
-rm -f $RPM_BUILD_ROOT%{mingw64_includedir}/pthread_time.h
-rm -f $RPM_BUILD_ROOT%{mingw64_includedir}/pthread_unistd.h
+rm -f %{buildroot}%{mingw32_includedir}/pthread_signal.h
+rm -f %{buildroot}%{mingw32_includedir}/pthread_time.h
+rm -f %{buildroot}%{mingw32_includedir}/pthread_unistd.h
+rm -f %{buildroot}%{mingw64_includedir}/pthread_signal.h
+rm -f %{buildroot}%{mingw64_includedir}/pthread_time.h
+rm -f %{buildroot}%{mingw64_includedir}/pthread_unistd.h
 %endif
 
 
@@ -128,6 +122,9 @@ rm -f $RPM_BUILD_ROOT%{mingw64_includedir}/pthread_unistd.h
 
 
 %changelog
+* Tue May 07 2019 Sandro Mani <manisandro@gmail.com> - 6.0.0-1
+- Update to 6.0.0
+
 * Fri Feb 01 2019 Fedora Release Engineering <releng@fedoraproject.org> - 5.0.4-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_30_Mass_Rebuild
 
