@@ -21,8 +21,8 @@
 %endif
 
 Name:           mingw-headers
-Version:        6.0.0
-Release:        3%{?dist}
+Version:        7.0.0
+Release:        1%{?dist}
 Summary:        Win32/Win64 header files
 
 License:        Public Domain and LGPLv2+ and ZPLv2.1
@@ -98,7 +98,7 @@ popd
 
 %install
 pushd mingw-w64-headers
-    %mingw_make_install DESTDIR=%{buildroot}
+    %mingw_make_install
 popd
 
 # Drop the dummy pthread headers if necessary
@@ -122,6 +122,9 @@ rm -f %{buildroot}%{mingw64_includedir}/pthread_unistd.h
 
 
 %changelog
+* Sat Jun 20 2020 Sandro Mani <manisandro@gmail.com> - 7.0.0-1
+- Update to 7.0.0
+
 * Wed Jan 29 2020 Fedora Release Engineering <releng@fedoraproject.org> - 6.0.0-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
 
