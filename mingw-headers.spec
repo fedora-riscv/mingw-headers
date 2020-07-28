@@ -22,7 +22,7 @@
 
 Name:           mingw-headers
 Version:        7.0.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Win32/Win64 header files
 
 License:        Public Domain and LGPLv2+ and ZPLv2.1
@@ -122,6 +122,9 @@ rm -f %{buildroot}%{mingw64_includedir}/pthread_unistd.h
 
 
 %changelog
+* Tue Jul 28 2020 Fedora Release Engineering <releng@fedoraproject.org> - 7.0.0-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
+
 * Sat Jun 20 2020 Sandro Mani <manisandro@gmail.com> - 7.0.0-1
 - Update to 7.0.0
 
