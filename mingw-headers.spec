@@ -21,8 +21,8 @@
 %endif
 
 Name:           mingw-headers
-Version:        7.0.0
-Release:        2%{?dist}
+Version:        8.0.0
+Release:        1%{?dist}
 Summary:        Win32/Win64 header files
 
 License:        Public Domain and LGPLv2+ and ZPLv2.1
@@ -114,15 +114,18 @@ rm -f %{buildroot}%{mingw64_includedir}/pthread_unistd.h
 
 
 %files -n mingw32-headers
-%license COPYING DISCLAIMER DISCLAIMER.PD mingw-w64-headers/direct-x/COPYING.LIB
+%license COPYING DISCLAIMER DISCLAIMER.PD
 %{mingw32_includedir}/*
 
 %files -n mingw64-headers
-%license COPYING DISCLAIMER DISCLAIMER.PD mingw-w64-headers/direct-x/COPYING.LIB
+%license COPYING DISCLAIMER DISCLAIMER.PD
 %{mingw64_includedir}/*
 
 
 %changelog
+* Fri Jan 15 2021 Sandro Mani <manisandro@gmail.com> - 8.0.0-1
+- Update to 8.0.0
+
 * Tue Jul 28 2020 Fedora Release Engineering <releng@fedoraproject.org> - 7.0.0-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
 
