@@ -21,7 +21,7 @@
 %endif
 
 Name:           mingw-headers
-Version:        8.0.2
+Version:        9.0.0
 Release:        1%{?dist}
 Summary:        Win32/Win64 header files
 
@@ -123,6 +123,9 @@ rm -f %{buildroot}%{mingw64_includedir}/pthread_unistd.h
 
 
 %changelog
+* Thu Jul 08 2021 Sandro Mani <manisandro@gmail.com> - 9.0.0-1
+- Update to 9.0.0
+
 * Mon May 17 2021 Sandro Mani <manisandro@gmail.com> - 8.0.2-1
 - Update to 8.0.2
 
