@@ -1,3 +1,4 @@
+%global mingw_build_ucrt64 1
 #%%global snapshot_date 20160723
 #%%global snapshot_rev 65a0c3298db7cc5cbded63259663cb29e4780a56
 #%%global snapshot_rev_short %(echo %snapshot_rev | cut -c1-6)
@@ -15,14 +16,14 @@
 # a file conflict with the winpthreads headers
 # Winpthreads is available as of Fedora 20
 %if 0%{?fedora} >= 20 || 0%{?rhel} >= 7
-%global bundle_dummy_pthread_headers 0
+%global bundle_dummy_pthread_headers 1
 %else
 %global bundle_dummy_pthread_headers 1
 %endif
 
 Name:           mingw-headers
 Version:        9.0.0
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Win32/Win64 header files
 
 License:        Public Domain and LGPLv2+ and ZPLv2.1
@@ -47,8 +48,9 @@ Patch0:         mingw-headers-no-widl.patch
 BuildArch:      noarch
 
 BuildRequires: make
-BuildRequires:  mingw32-filesystem >= 95
-BuildRequires:  mingw64-filesystem >= 95
+BuildRequires: mingw32-filesystem >= 133
+BuildRequires: mingw64-filesystem >= 133
+BuildRequires: ucrt64-filesystem >= 133
 
 
 %description
@@ -78,6 +80,16 @@ Requires:       mingw64-winpthreads
 %description -n mingw64-headers
 MinGW Windows cross-compiler Win64 header files.
 
+%package -n ucrt64-headers
+Summary:        MinGW Windows cross-compiler Win64 header files
+Requires:       ucrt64-filesystem >= 133
+%if 0%{bundle_dummy_pthread_headers} == 0
+Requires:       ucrt64-winpthreads
+%endif
+
+%description -n ucrt64-headers
+MinGW Windows cross-compiler Win64 header files.
+
 
 %prep
 %if 0%{?snapshot_date}
@@ -92,6 +104,8 @@ unzip %{S:0}
 
 
 %build
+export UCRT64_CONFIGURE_ARGS="--with-default-msvcrt=ucrt"
+
 pushd mingw-w64-headers
     %mingw_configure --enable-sdk=all
 popd
@@ -110,6 +124,9 @@ rm -f %{buildroot}%{mingw32_includedir}/pthread_unistd.h
 rm -f %{buildroot}%{mingw64_includedir}/pthread_signal.h
 rm -f %{buildroot}%{mingw64_includedir}/pthread_time.h
 rm -f %{buildroot}%{mingw64_includedir}/pthread_unistd.h
+rm -f %{buildroot}%{ucrt64_includedir}/pthread_signal.h
+rm -f %{buildroot}%{ucrt64_includedir}/pthread_time.h
+rm -f %{buildroot}%{ucrt64_includedir}/pthread_unistd.h
 %endif
 
 
@@ -121,8 +138,15 @@ rm -f %{buildroot}%{mingw64_includedir}/pthread_unistd.h
 %license COPYING DISCLAIMER DISCLAIMER.PD
 %{mingw64_includedir}/*
 
+%files -n ucrt64-headers
+%license COPYING DISCLAIMER DISCLAIMER.PD
+%{ucrt64_includedir}/*
+
 
 %changelog
+* Wed Feb 23 2022 Marc-André Lureau <marcandre.lureau@redhat.com> - 9.0.0-4
+- Add ucrt64 target (bundle_dummy_pthread_headers=1)
+
 * Thu Jan 20 2022 Fedora Release Engineering <releng@fedoraproject.org> - 9.0.0-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_36_Mass_Rebuild
 
