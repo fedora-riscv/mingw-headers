@@ -93,7 +93,7 @@ unzip %{S:0}
 
 %build
 pushd mingw-w64-headers
-    %mingw_configure --enable-sdk=all --enable-secure-api
+    %mingw_configure --enable-sdk=all
 popd
 
 
