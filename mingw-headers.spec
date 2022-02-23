@@ -16,14 +16,14 @@
 # a file conflict with the winpthreads headers
 # Winpthreads is available as of Fedora 20
 %if 0%{?fedora} >= 20 || 0%{?rhel} >= 7
-%global bundle_dummy_pthread_headers 1
+%global bundle_dummy_pthread_headers 0
 %else
 %global bundle_dummy_pthread_headers 1
 %endif
 
 Name:           mingw-headers
 Version:        9.0.0
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        Win32/Win64 header files
 
 License:        Public Domain and LGPLv2+ and ZPLv2.1
@@ -61,7 +61,7 @@ MinGW Windows cross-compiler Win32 and Win64 header files.
 Summary:        MinGW Windows cross-compiler Win32 header files
 Requires:       mingw32-filesystem >= 95
 %if 0%{bundle_dummy_pthread_headers} == 0
-Requires:       mingw32-winpthreads
+#Requires:       mingw32-winpthreads
 %endif
 
 Obsoletes:      mingw32-w32api < 3.17-3%{?dist}
@@ -74,7 +74,7 @@ MinGW Windows cross-compiler Win32 header files.
 Summary:        MinGW Windows cross-compiler Win64 header files
 Requires:       mingw64-filesystem >= 95
 %if 0%{bundle_dummy_pthread_headers} == 0
-Requires:       mingw64-winpthreads
+#Requires:       mingw64-winpthreads
 %endif
 
 %description -n mingw64-headers
@@ -84,7 +84,7 @@ MinGW Windows cross-compiler Win64 header files.
 Summary:        MinGW Windows cross-compiler Win64 header files
 Requires:       ucrt64-filesystem >= 133
 %if 0%{bundle_dummy_pthread_headers} == 0
-Requires:       ucrt64-winpthreads
+#Requires:       ucrt64-winpthreads
 %endif
 
 %description -n ucrt64-headers
@@ -144,6 +144,9 @@ rm -f %{buildroot}%{ucrt64_includedir}/pthread_unistd.h
 
 
 %changelog
+* Wed Feb 23 2022 Marc-André Lureau <marcandre.lureau@redhat.com> - 9.0.0-5
+- Add ucrt64 target (bundle_dummy_pthread_headers=0, -Requires: winpthread)
+
 * Wed Feb 23 2022 Marc-André Lureau <marcandre.lureau@redhat.com> - 9.0.0-4
 - Add ucrt64 target (bundle_dummy_pthread_headers=1)
 
