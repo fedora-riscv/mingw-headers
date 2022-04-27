@@ -22,8 +22,8 @@
 %endif
 
 Name:           mingw-headers
-Version:        9.0.0
-Release:        6%{?dist}
+Version:        10.0.0
+Release:        1%{?dist}
 Summary:        Win32/Win64 header files
 
 License:        Public Domain and LGPLv2+ and ZPLv2.1
@@ -107,7 +107,7 @@ unzip %{S:0}
 export UCRT64_CONFIGURE_ARGS="--with-default-msvcrt=ucrt"
 
 pushd mingw-w64-headers
-    %mingw_configure --enable-sdk=all
+    %mingw_configure --enable-sdk=all --enable-idl
 popd
 
 
@@ -144,6 +144,9 @@ rm -f %{buildroot}%{ucrt64_includedir}/pthread_unistd.h
 
 
 %changelog
+* Tue Apr 26 2022 Sandro Mani <manisandro@gmail.com> - 10.0.0-1
+- Update to 10.0.0
+
 * Wed Mar 02 2022 Marc-André Lureau <marcandre.lureau@redhat.com> - 9.0.0-6
 - Add ucrt64 target (bundle_dummy_pthread_headers=0, +Requires: winpthread)
 

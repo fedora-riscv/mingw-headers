@@ -1,6 +1,6 @@
-diff -rupN --no-dereference mingw-w64-v9.0.0/mingw-w64-headers/configure mingw-w64-v9.0.0-new/mingw-w64-headers/configure
---- mingw-w64-v9.0.0/mingw-w64-headers/configure	2021-05-22 14:34:25.000000000 +0200
-+++ mingw-w64-v9.0.0-new/mingw-w64-headers/configure	2021-06-22 09:18:27.040547425 +0200
+diff -rupN --no-dereference mingw-w64-v10.0.0/mingw-w64-headers/configure mingw-w64-v10.0.0-new/mingw-w64-headers/configure
+--- mingw-w64-v10.0.0/mingw-w64-headers/configure	2022-04-03 17:08:58.000000000 +0200
++++ mingw-w64-v10.0.0-new/mingw-w64-headers/configure	2022-04-26 09:09:23.178755423 +0200
 @@ -2734,7 +2734,7 @@ printf "%s\n" "$with_widl" >&6; }
  
  if test "x$with_widl" = xno
@@ -10,9 +10,9 @@ diff -rupN --no-dereference mingw-w64-v9.0.0/mingw-w64-headers/configure mingw-w
  else $as_nop
  
    if test "x$srcdir" = x.
-diff -rupN --no-dereference mingw-w64-v9.0.0/mingw-w64-headers/configure.ac mingw-w64-v9.0.0-new/mingw-w64-headers/configure.ac
---- mingw-w64-v9.0.0/mingw-w64-headers/configure.ac	2021-05-22 14:34:25.000000000 +0200
-+++ mingw-w64-v9.0.0-new/mingw-w64-headers/configure.ac	2021-06-22 09:18:27.041547429 +0200
+diff -rupN --no-dereference mingw-w64-v10.0.0/mingw-w64-headers/configure.ac mingw-w64-v10.0.0-new/mingw-w64-headers/configure.ac
+--- mingw-w64-v10.0.0/mingw-w64-headers/configure.ac	2022-04-03 17:08:58.000000000 +0200
++++ mingw-w64-v10.0.0-new/mingw-w64-headers/configure.ac	2022-04-26 09:09:23.178755423 +0200
 @@ -27,7 +27,7 @@ AC_ARG_WITH([widl],
    [AS_VAR_SET([with_widl],[no])])
  AC_MSG_RESULT([$with_widl])
