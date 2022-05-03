@@ -1,43 +1,21 @@
 %global mingw_build_ucrt64 1
-#%%global snapshot_date 20160723
-#%%global snapshot_rev 65a0c3298db7cc5cbded63259663cb29e4780a56
-#%%global snapshot_rev_short %(echo %snapshot_rev | cut -c1-6)
-#%%global branch v5.x
-
-#%%global pre rc2
-
 # The mingw-w64-headers provide the headers pthread_time.h
 # and pthread_unistd.h by default and are dummy headers.
 # The real implementation for these headers is in a separate
 # library called winpthreads. As long as winpthreads isn't
-# available (and the old pthreads-w32 implementation is used)
-# the flag below needs to be set to 1. When winpthreads is
-# available then this flag needs to be set to 0 to avoid
-# a file conflict with the winpthreads headers
-# Winpthreads is available as of Fedora 20
-%if 0%{?fedora} >= 20 || 0%{?rhel} >= 7
-%global bundle_dummy_pthread_headers 0
-%else
+# build, the flag below needs to be set to 1. When winpthreads
+# is available then this flag needs to be set to 0 to avoid
+# a file conflict with the winpthreads headers.
 %global bundle_dummy_pthread_headers 1
-%endif
 
 Name:           mingw-headers
 Version:        10.0.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Win32/Win64 header files
 
 License:        Public Domain and LGPLv2+ and ZPLv2.1
 URL:            http://mingw-w64.sourceforge.net/
-%if 0%{?snapshot_date}
-# To regenerate a snapshot:
-# Use your regular webbrowser to open https://sourceforge.net/p/mingw-w64/mingw-w64/ci/%{snapshot_rev}/tarball
-# This triggers the SourceForge instructure to generate a snapshot
-# After that you can pull in the archive with:
-# spectool -g mingw-headers.spec
-Source0:        http://sourceforge.net/code-snapshots/git/m/mi/mingw-w64/mingw-w64.git/mingw-w64-mingw-w64-%{snapshot_rev}.zip
-%else
 Source0:        http://downloads.sourceforge.net/mingw-w64/mingw-w64-v%{version}%{?pre:-%{pre}}.tar.bz2
-%endif
 
 # Our RPM macros automatically set the environment variable WIDL
 # This confuses the mingw-headers configure scripts and causes various
@@ -64,9 +42,6 @@ Requires:       mingw32-filesystem >= 95
 Requires:       mingw32-winpthreads
 %endif
 
-Obsoletes:      mingw32-w32api < 3.17-3%{?dist}
-Provides:       mingw32-w32api = 3.17-3%{?dist}
-
 %description -n mingw32-headers
 MinGW Windows cross-compiler Win32 header files.
 
@@ -92,15 +67,7 @@ MinGW Windows cross-compiler Win64 header files.
 
 
 %prep
-%if 0%{?snapshot_date}
-rm -rf mingw-w64-v%{version}
-mkdir mingw-w64-v%{version}
-cd mingw-w64-v%{version}
-unzip %{S:0}
-%autosetup -p1 -D -T -n mingw-w64-v%{version}/mingw-w64-mingw-w64-%{snapshot_rev}
-%else
 %autosetup -p1 -n mingw-w64-v%{version}%{?pre:-%{pre}}
-%endif
 
 
 %build
@@ -144,6 +111,10 @@ rm -f %{buildroot}%{ucrt64_includedir}/pthread_unistd.h
 
 
 %changelog
+* Tue May 03 2022 Sandro Mani <manisandro@gmail.com> - 10.0.0-2
+- Build with dummy pthread headers
+- Spec cleanups
+
 * Tue Apr 26 2022 Sandro Mani <manisandro@gmail.com> - 10.0.0-1
 - Update to 10.0.0
 
