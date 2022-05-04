@@ -6,11 +6,11 @@
 # build, the flag below needs to be set to 1. When winpthreads
 # is available then this flag needs to be set to 0 to avoid
 # a file conflict with the winpthreads headers.
-%global bundle_dummy_pthread_headers 1
+%global bundle_dummy_pthread_headers 0
 
 Name:           mingw-headers
 Version:        10.0.0
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Win32/Win64 header files
 
 License:        Public Domain and LGPLv2+ and ZPLv2.1
@@ -111,6 +111,9 @@ rm -f %{buildroot}%{ucrt64_includedir}/pthread_unistd.h
 
 
 %changelog
+* Wed May 04 2022 Sandro Mani <manisandro@gmail.com> - 10.0.0-3
+- Rebuild (bundle_dummy_pthread_headers=0)
+
 * Tue May 03 2022 Sandro Mani <manisandro@gmail.com> - 10.0.0-2
 - Build with dummy pthread headers
 - Spec cleanups
