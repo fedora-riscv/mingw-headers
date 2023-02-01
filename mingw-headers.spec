@@ -6,7 +6,8 @@
 # build, the flag below needs to be set to 1. When winpthreads
 # is available then this flag needs to be set to 0 to avoid
 # a file conflict with the winpthreads headers.
-%global bundle_dummy_pthread_headers 0
+%bcond_without bootstrap
+%global bundle_dummy_pthread_headers 1
 
 Name:           mingw-headers
 Version:        10.0.0
